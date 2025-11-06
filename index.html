@@ -1,392 +1,237 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Radar – Horizontes</title>
-    <style>
-        :root {
-            --brand: #d81e05;
-            --ink: #1f2937;
-            --muted: #5b6573;
-            --bg: #f6f7f9;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radar – Horizontes | Instituto SENAI-SP</title>
 
-        * {
-            box-sizing: border-box
-        }
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    display:flex;flex-direction:column;min-height:100vh;
+    font-family:"Segoe UI",sans-serif;background:#f9f9f9;color:#333;
+  }
 
-        body {
-            font-family: Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 16px;
-            background: var(--bg);
-            color: var(--ink)
-        }
+  /* ===== MENU LATERAL ===== */
+  nav.menu{
+    position:fixed;top:0;left:0;width:200px;height:100vh;
+    background:#f1f5f9;border-right:2px solid #dde1e4;
+    padding:1rem 0.6rem 4rem 0.6rem;
+    display:flex;flex-direction:column;gap:0.6rem;
+    justify-content:flex-start;z-index:100;
+  }
+  nav.menu h2{
+    text-align:center;color:#004080;font-size:1rem;margin-bottom:.7rem;
+  }
+  nav.menu a{
+    display:block;text-decoration:none;text-align:center;
+    padding:0.6rem;background:#e2e8f0;border-radius:6px;
+    color:#333;font-weight:500;transition:all .2s;
+  }
+  nav.menu a:hover{background:#cbd5e1;transform:translateX(3px)}
+  nav.menu .voltar{
+    margin-top:auto;
+    background:#004080;color:#fff;font-weight:bold;
+    border-radius:8px;padding:0.8rem;text-align:center;
+    box-shadow:0 2px 4px rgba(0,0,0,0.15);
+  }
+  nav.menu .voltar:hover{background:#003366;transform:none;}
 
-        .wrap {
-            max-width: 1280px;
-            margin: 0 auto
-        }
+  /* ===== CABEÇALHO ===== */
+  header{
+    background:#004080;color:#fff;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1rem 2rem;margin-left:200px;
+    font-weight:bold;
+  }
+  header img{
+    height:48px;width:auto;
+  }
 
-        header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 8px
-        }
+  /* ===== CONTEÚDO ===== */
+  main{
+    flex:1;padding:2rem;margin-left:200px;
+  }
 
-        header .brand img {
-            height: 44px;
-            width: auto;
-        }
+  footer{
+    background:#eee;color:#555;text-align:center;font-size:.85rem;
+    padding:1rem;margin-left:200px;
+  }
 
-        header .title h1 {
-            font-size: 20px;
-            margin: 0
-        }
+  @media(max-width:700px){
+    nav.menu{position:relative;width:100%;height:auto;flex-direction:row;
+      border-right:none;border-bottom:2px solid #dde1e4;justify-content:center;}
+    header,main,footer{margin-left:0}
+    nav.menu .voltar{margin-top:0}
+  }
 
-        header .title .sub {
-            font-size: 12px;
-            color: var(--muted)
-        }
+  /* ===== RADAR PANEL ===== */
+  .panel{
+    background:#fff;border:1px solid #e0e0e0;border-radius:10px;
+    padding:16px;box-shadow:0 4px 10px rgba(0,0,0,.05);
+  }
 
-        .panel {
-            background: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 16px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, .04)
-        }
+  #chart{width:100%;height:780px}
 
-        #chart {
-            width: 100%;
-            height: 780px
-        }
+  .toolbar{
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0 8px;
+  }
 
-        .toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-items: center;
-            margin: 12px 0 8px
-        }
+  .toolbar button{
+    padding:8px 10px;border-radius:8px;border:1px solid #c9ced6;
+    background:#fff;cursor:pointer;
+  }
+  .toolbar button.h1{border-color:#d81e05;color:#d81e05}
+  .toolbar button.h2{border-color:#005fb8;color:#005fb8}
+  .toolbar button.h3{border-color:#006400;color:#006400}
 
-        .toolbar button {
-            padding: 8px 10px;
-            border-radius: 8px;
-            border: 1px solid #c9ced6;
-            background: #fff;
-            cursor: pointer
-        }
-        
-        .toolbar button.h1 { border-color:#d81e05; color:#d81e05; }
-        .toolbar button.h2 { border-color:#005fb8; color:#005fb8; }
-        .toolbar button.h3 { border-color:#f9a825; color:#f9a825; }
+  .toolbar input[type='text']{
+    padding:8px 10px;border-radius:8px;border:1px solid #c9ced6;
+    min-width:260px;margin-top:8px;
+  }
+  .toolbar-group{
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;width:100%;
+  }
+  .toolbar-group strong{font-size:14px;color:#5b6573;margin-left:4px;}
 
-        .toolbar input[type='text'] {
-            padding: 8px 10px;
-            border-radius: 8px;
-            border: 1px solid #c9ced6;
-            min-width: 260px;
-            margin-top: 8px;
-        }
-        
-        .toolbar-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-items: center;
-            width: 100%;
-        }
-        
-        .toolbar-group strong,
-        .toolbar-group span {
-             font-size: 14px;
-             color: var(--muted);
-             margin-left: 4px;
-        }
+  .legend{
+    display:flex;gap:10px;font-size:12px;color:#374151;margin-bottom:6px
+  }
+  .badge{display:inline-flex;align-items:center;gap:6px}
+  .badge i{
+    display:inline-block;width:12px;height:12px;border-radius:3px
+  }
 
-        .meta {
-            color: var(--muted);
-            font-size: 12px;
-            margin-top: 8px
-        }
-
-        @media print {
-
-            .toolbar,
-            .meta,
-            header .sub {
-                display: none !important
-            }
-
-            #chart {
-                height: 900px
-            }
-
-            body {
-                padding: 0
-            }
-
-            .panel {
-                border: none;
-                box-shadow: none
-            }
-        }
-
-        .legend {
-            display: flex;
-            gap: 10px;
-            font-size: 12px;
-            color: #374151;
-            margin-bottom: 6px
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px
-        }
-
-        .badge i {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 3px
-        }
-    </style>
+  .meta{color:#5b6573;font-size:12px;margin-top:8px}
+</style>
 </head>
 
 <body>
-    <div class="wrap">
-        <header>
-            <div class="brand">
-                <img src="dt_senai.png" alt="Logo SENAI DT" />
-            </div>
-            <div class="title">
-                <h1>Radar – Horizontes</h1>
-                <div class="sub">Versão <b>offline</b> com Plotly local. <button id="btnPdf" style="margin-left:10px" onclick="window.print()">Exportar PDF</button></div>
-            </div>
-        </header>
-        <div class="legend" style="display:flex;gap:10px;font-size:12px;color:#374151;margin-bottom:6px">
-            <span class="badge"><i style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#d81e05"></i>H1</span>
-            <span class="badge"><i style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#005fb8"></i>H2</span>
-            <span class="badge"><i style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#f9a825"></i>H3</span>
-        </div>
-        <div class="panel">
-            <div class="toolbar">
-                <div class="toolbar-group">
-                    <button id="btnShowAll">Mostrar todos</button>
-                    <button id="btnHideAll">Ocultar todos</button>
-                    <button id="btnTop10">Mostrar Top 10</button>
-                </div>
-                
-                <div class="toolbar-group">
-                    <strong>Horizontes:</strong>
-                    <button id="btnH1" class="h1">H1</button>
-                    <button id="btnH2" class="h2">H2</button>
-                    <button id="btnH3" class="h3">H3</button>
-                </div>
-                
-                <div class="toolbar-group">
-                     <strong>Grupos:</strong>
-                    <button id="btnG1">G1</button>
-                    <button id="btnG2">G2</button>
-                    <button id="btnG3">G3</button>
-                    <button id="btnG4">G4</button>
-                    <button id="btnG5">G5</button>
-                    <button id="btnG6">G6</button>
-                </div>
+<!-- MENU LATERAL -->
+<nav class="menu">
+  <h2>MENU</h2>
+  <a href="https://tirggo.github.io/radar-assessorias/" target="_blank">Horizontes</a>
+  <a href="#" id="btnShowAll">Mostrar Todos</a>
+  <a href="#" id="btnHideAll">Ocultar Todos</a>
+  <a href="#" id="btnTop10">Top 10</a>
+  <a href="#" id="btnH1" class="h1">Filtrar H1</a>
+  <a href="#" id="btnH2" class="h2">Filtrar H2</a>
+  <a href="#" id="btnH3" class="h3">Filtrar H3</a>
 
-                <div class="toolbar-group">
-                    <strong>Tipos:</strong>
-                    <button id="btnASD">ASD</button>
-                    <button id="btnPDI">PDI</button>
-                    <button id="btnMTG">MTG</button>
-                </div>
-                
-                <input id="search" type="text" placeholder="Filtrar por nome do projeto…" />
-            </div>
-            <div id="chart"></div>
-            <div class="meta">• Clique na legenda para ligar/desligar cada projeto. • Eixo radial: 0–5.</div>
-        </div>
+  <!-- Botão Voltar fixo -->
+  <a href="https://tirggo.github.io/" class="voltar">⟵ Voltar</a>
+</nav>
+
+<!-- CABEÇALHO -->
+<header>
+  <span>INSTITUTO SENAI DE TECNOLOGIA DA CONSTRUÇÃO CIVIL - SENAI-SP</span>
+  <img src="dt_senai.png" alt="Logo Distrito Tecnológico SENAI-SP">
+</header>
+
+<main>
+  <div class="panel">
+    <div class="legend">
+      <span class="badge"><i style="background:#d81e05"></i>H1</span>
+      <span class="badge"><i style="background:#005fb8"></i>H2</span>
+      <span class="badge"><i style="background:linear-gradient(135deg,#006400,#00a000)"></i>H3</span>
     </div>
-    
-    <script src="plotly-2.32.0.min.js"></script>
-    <script>
-        (function() {
-            if (!window.Plotly) {
-                var s = document.createElement("script");
-                s.src = "https://cdn.plot.ly/plotly-2.32.0.min.js";
-                document.head.appendChild(s);
-            }
-        })();
-    </script>
-    
-    <script>
-        // === DADOS DO PORTFÓLIO (V06) ===
-        const criteria = ["Complexidade", "Know-How", "Abrangência", "Relevância", "Retorno"];
 
-        const projects = [
-            "1 - Ensaios de Resistência e Reação ao Fogo em Sistemas Construtivos Comerciais e Industriais",
-            "2 - Ensaios Acústicos e de Estanqueidade para Edificações Comerciais, Educacionais e de Saúde",
-            "3 - Rota Tecnológica para Valorização de Lodo de ETE em produtos de construção",
-            "4 - Análise e Especificação de Materiais Sustentáveis e de Baixo Carbono para empreendimentos",
-            "5 - Assessoria em canteiro Lean Otimizado",
-            "6 - Assessoria para criacao de processos otimizados de implementação de construção modular e pré-fabricada",
-            "7 - Assessoria para analise e validação de Materiais Sustentáveis e BioConstrução",
-            "8 - Assessoria em gestão de Ativos Preditiva (GAP)",
-            "9 - Assessoria para Gêmeo Digital \"Lite\" para Otimização de ProcessOS em PMEs da Construção Civil",
-            "10 - Gestão Inteligente da Água em Obras UrbanAS",
-            "11 - Assessoria para adoção de tecnologias digitais para Obras de Infraestruturas",
-            "12 - Assessoria em Desempenho Energético e Hídrico com Foco em Resfriamento Passivo",
-            "13 - Assessoria de Smart Cities para getão de grandes de obra",
-            "14 - Assessoria em Conecta Canteiro 4.0",
-            "15 - Assessoria para Gêmeos Digitais para Gestão Hídrica e de Energia",
-            "16 - Desenvolver tecnologias e processos de construção modular e pré-fabricada para aumentar a produtividade",
-            "17 - Desenvolver um sistema de Superfícies Permeáveis Inteligentes para Resiliência Urbana (Smart Permeable Surfaces)",
-            "18 - Sistema Construtivo PCV-Concreto com Polímeros Sustentáveis",
-            "19 - Assessoria para projetos de casa Inteligente em Condomínios",
-            "20 - Plataforma para o Monitoramento Contínuo via Gêmeos Digitais para Normas de Desempenhos",
-            "21 - Sistema Inteligente de Gestão Hídrica e Captação e Reuso da água pluvial urbano integrado",
-            "22 - PDI: Simulador Digital de Desempenho Térmico e Acústico Integrado à NBR 15575"
-        ];
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <strong>Grupos:</strong>
+        <button id="btnG1">G1</button><button id="btnG2">G2</button><button id="btnG3">G3</button>
+        <button id="btnG4">G4</button><button id="btnG5">G5</button><button id="btnG6">G6</button>
+      </div>
+      <div class="toolbar-group">
+        <strong>Tipos:</strong>
+        <button id="btnASD">ASD</button><button id="btnPDI">PDI</button><button id="btnMTG">MTG</button>
+      </div>
+      <input id="search" type="text" placeholder="Filtrar por nome do projeto…" />
+    </div>
 
-        const vals = [
-            [4.0, 5.0, 5.0, 3.0, 4.0], [4.0, 3.0, 4.0, 3.0, 4.0], [5.0, 3.0, 3.0, 3.0, 4.0], [5.0, 3.0, 3.0, 3.0, 3.0], [5.0, 3.0, 3.0, 3.0, 3.0], 
-            [5.0, 3.0, 2.0, 3.0, 4.0], [5.0, 3.0, 2.0, 4.0, 3.0], [3.0, 3.0, 4.0, 3.0, 3.0], [3.0, 3.0, 3.0, 3.0, 4.0], [2.0, 3.0, 4.0, 3.0, 4.0], 
-            [3.0, 3.0, 3.0, 3.0, 3.0], [3.0, 3.0, 3.0, 3.0, 3.0], [3.0, 3.0, 3.0, 3.0, 3.0], [3.0, 3.0, 3.0, 3.0, 3.0], [2.0, 3.0, 3.0, 3.0, 4.0], 
-            [3.0, 3.0, 2.0, 3.0, 3.0], [2.0, 3.0, 4.0, 3.0, 2.0], [2.0, 4.0, 3.0, 3.0, 2.0], [2.0, 3.0, 3.0, 3.0, 2.0], [1.0, 4.0, 4.0, 3.0, 1.0], 
-            [1.0, 3.0, 4.0, 3.0, 1.0], [1.0, 3.0, 2.0, 3.0, 1.0]
-        ];
+    <div id="chart"></div>
+    <div class="meta">• Clique na legenda para ligar/desligar cada projeto. • Eixo radial: 0–5.</div>
+  </div>
+</main>
 
-        // --- Arrays de Classificação para Filtros ---
-        
-        // Coluna H (Horizonte)
-        const colors = [
-            "#d81e05", "#d81e05", "#d81e05", "#d81e05", "#d81e05", "#d81e05", "#d81e05", "#005fb8", "#005fb8", "#f9a825",
-            "#d81e05", "#005fb8", "#005fb8", "#005fb8", "#005fb8", "#005fb8", "#005fb8", "#005fb8", "#005fb8", "#f9a825",
-            "#005fb8", "#005fb8"
-        ];
-        
-        // Coluna GRUPO (1-6)
-        const grupos = [
-            4, 4, 6, 6, 5, 3, 6, 5, 2, 1, 
-            1, 4, 2, 5, 2, 3, 6, 6, 2, 2, 
-            1, 4
-        ];
-        
-        // Coluna TIPO (ASD, PDI, MTG)
-        const tipos = [
-            "MTG", "MTG", "PDI", "ASD", "ASD", "ASD", "ASD", "ASD", "ASD", "PDI", 
-            "ASD", "ASD", "ASD", "ASD", "ASD", "PDI", "PDI", "PDI", "ASD", "PDI", 
-            "PDI", "PDI"
-        ];
+<footer>
+  <strong>Distrito Tecnológico do SENAI-SP</strong><br>
+  Desenvolvido pelo Distrito Tecnológico do SENAI-SP — Unidade São Bernardo do Campo<br>
+  © 2025 | Infográfico público para fins institucionais e educacionais
+</footer>
 
-        // === FIM DOS DADOS ===
+<!-- Plotly -->
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 
-        const theta = criteria.concat([criteria[0]]);
+<script>
+// === DADOS DO RADAR ===
+const criteria=["Complexidade","Know-How","Abrangência","Relevância","Retorno"];
+const projects=[
+ "1 - Ensaios de Resistência e Reação ao Fogo","2 - Ensaios Acústicos e de Estanqueidade",
+ "3 - Valorização de Lodo de ETE","4 - Materiais Sustentáveis","5 - Canteiro Lean",
+ "6 - Construção Modular","7 - BioConstrução","8 - Gestão Preditiva",
+ "9 - Gêmeo Digital Lite","10 - Gestão Inteligente da Água",
+ "11 - Tecnologias em Infraestrutura","12 - Desempenho Energético","13 - Smart Cities",
+ "14 - Conecta Canteiro 4.0","15 - Gêmeos Digitais","16 - Construção Modular Avançada",
+ "17 - Superfícies Permeáveis","18 - PCV-Concreto","19 - Casa Inteligente",
+ "20 - Monitoramento Digital","21 - Gestão Hídrica Inteligente","22 - Simulador NBR15575"
+];
+const vals=[
+ [4,5,5,3,4],[4,3,4,3,4],[5,3,3,3,4],[5,3,3,3,3],[5,3,3,3,3],
+ [5,3,2,3,4],[5,3,2,4,3],[3,3,4,3,3],[3,3,3,3,4],[2,3,4,3,4],
+ [3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[2,3,3,3,4],
+ [3,3,2,3,3],[2,3,4,3,2],[2,4,3,3,2],[2,3,3,3,2],[1,4,4,3,1],
+ [1,3,4,3,1],[1,3,2,3,1]
+];
+const colors=[
+ "#d81e05","#d81e05","#d81e05","#d81e05","#d81e05","#d81e05","#d81e05","#005fb8","#005fb8","#006400",
+ "#d81e05","#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#006400",
+ "#005fb8","#005fb8"
+];
+const grupos=[4,4,6,6,5,3,6,5,2,1,1,4,2,5,2,3,6,6,2,2,1,4];
+const tipos=["MTG","MTG","PDI","ASD","ASD","ASD","ASD","ASD","ASD","PDI","ASD","ASD","ASD","ASD","ASD","PDI","PDI","PDI","ASD","PDI","PDI","PDI"];
+const theta=criteria.concat([criteria[0]]);
 
-        function build() {
-            if (!window.Plotly) {
-                setTimeout(build, 120);
-                return;
-            }
-            const traces = projects.map((name, i) => {
-                const r0 = vals[i];
-                const r = r0.concat([r0[0]]);
-                return {
-                    type: 'scatterpolar',
-                    r,
-                    theta,
-                    name,
-                    fill: 'toself',
-                    opacity: 0.16,
-                    line: {
-                        width: 1,
-                        color: colors[i]
-                    },
-                    fillcolor: colors[i] + '22'
-                };
-            });
-            const layout = {
-                margin: {
-                    l: 30,
-                    r: 30,
-                    t: 10,
-                    b: 10
-                },
-                showlegend: true,
-                polar: {
-                    radialaxis: {
-                        range: [0, 5],
-                        dtick: 1
-                    }
-                }
-            };
-            Plotly.newPlot('chart', traces, layout, {
-                responsive: true,
-                displaylogo: false
-            });
-        }
-        build();
+// === DESENHO DO RADAR ===
+function build(){
+  const traces=projects.map((n,i)=>{
+    const r0=vals[i],r=r0.concat([r0[0]]);
+    let color=colors[i];
+    // Degradê sutil para H3
+    let fillColor=(color==="#006400")?"rgba(0,100,0,0.25)":"#00000000";
+    return{
+      type:"scatterpolar",r,theta,name:n,fill:"toself",
+      opacity:0.3,line:{width:1,color:color},
+      fillcolor:fillColor
+    };
+  });
+  const layout={margin:{l:30,r:30,t:10,b:10},showlegend:true,
+    polar:{radialaxis:{range:[0,5],dtick:1}}
+  };
+  Plotly.newPlot("chart",traces,layout,{responsive:true,displaylogo:false});
+}
+build();
 
-        const idx = [...Array(projects.length).keys()];
-        
-        addEventListener('DOMContentLoaded', () => {
-            const show = () => Plotly.restyle('chart', {
-                visible: true
-            }, idx);
-            const hide = () => Plotly.restyle('chart', {
-                visible: 'legendonly'
-            }, idx);
-            
-            // --- Função de Filtro Genérica ---
-            // Oculta todos, depois mostra apenas os que batem com o valor no array específico
-            const filterBy = (dataArray, value) => {
-                hide();
-                const vis = dataArray.map(v => v === value ? true : 'legendonly');
-                Plotly.restyle('chart', 'visible', vis);
-            };
-
-            // Botões Gerais
-            document.getElementById('btnShowAll').onclick = show;
-            document.getElementById('btnHideAll').onclick = hide;
-            document.getElementById('btnTop10').onclick = () => {
-                hide();
-                Plotly.restyle('chart', {
-                    visible: true
-                }, idx.slice(0, Math.min(10, idx.length)));
-            };
-
-            // Filtros de Horizonte
-            document.getElementById('btnH1').onclick = () => filterBy(colors, '#d81e05');
-            document.getElementById('btnH2').onclick = () => filterBy(colors, '#005fb8');
-            document.getElementById('btnH3').onclick = () => filterBy(colors, '#f9a825');
-
-            // Filtros de Grupo
-            document.getElementById('btnG1').onclick = () => filterBy(grupos, 1);
-            document.getElementById('btnG2').onclick = () => filterBy(grupos, 2);
-            document.getElementById('btnG3').onclick = () => filterBy(grupos, 3);
-            document.getElementById('btnG4').onclick = () => filterBy(grupos, 4);
-            document.getElementById('btnG5').onclick = () => filterBy(grupos, 5);
-            document.getElementById('btnG6').onclick = () => filterBy(grupos, 6);
-
-            // Filtros de Tipo
-            document.getElementById('btnASD').onclick = () => filterBy(tipos, 'ASD');
-            document.getElementById('btnPDI').onclick = () => filterBy(tipos, 'PDI');
-            document.getElementById('btnMTG').onclick = () => filterBy(tipos, 'MTG');
-
-            // Lógica da barra de busca
-            document.getElementById('search').addEventListener('input', e => {
-                const q = e.target.value.toLowerCase().trim();
-                const vis = idx.map(i => projects[i].toLowerCase().includes(q) ? true : 'legendonly');
-                Plotly.restyle('chart', 'visible', vis);
-            });
-        });
-    </script>
+// === FILTROS ===
+const idx=[...Array(projects.length).keys()];
+const filterBy=(arr,val)=>{
+  Plotly.restyle("chart","visible",arr.map(v=>v===val?true:"legendonly"));
+};
+document.getElementById("btnShowAll").onclick=()=>Plotly.restyle("chart","visible",true,idx);
+document.getElementById("btnHideAll").onclick=()=>Plotly.restyle("chart","visible","legendonly",idx);
+document.getElementById("btnTop10").onclick=()=>{
+  Plotly.restyle("chart","visible","legendonly",idx);
+  Plotly.restyle("chart","visible",true,idx.slice(0,10));
+};
+document.getElementById("btnH1").onclick=()=>filterBy(colors,"#d81e05");
+document.getElementById("btnH2").onclick=()=>filterBy(colors,"#005fb8");
+document.getElementById("btnH3").onclick=()=>filterBy(colors,"#006400");
+["G1","G2","G3","G4","G5","G6"].forEach((g,i)=>document.getElementById("btn"+g).onclick=()=>filterBy(grupos,i+1));
+["ASD","PDI","MTG"].forEach(t=>document.getElementById("btn"+t).onclick=()=>filterBy(tipos,t));
+document.getElementById("search").addEventListener("input",e=>{
+  const q=e.target.value.toLowerCase().trim();
+  Plotly.restyle("chart","visible",idx.map(i=>projects[i].toLowerCase().includes(q)?true:"legendonly"));
+});
+</script>
 </body>
-
 </html>
-
