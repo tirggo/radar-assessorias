@@ -20,66 +20,62 @@
     background:linear-gradient(180deg,#004080 0%,#0a589b 100%);
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     color:#fff;z-index:1000;
-    animation:fadeIn 0.8s ease both;
   }
   #loader img {
     height:90px;width:auto;margin-bottom:16px;
     filter:drop-shadow(0 0 8px rgba(255,255,255,0.6));
     animation:pulse 2s infinite ease-in-out;
   }
-  #loader span { font-size:1rem;letter-spacing:0.5px; }
-
-  @keyframes fadeOut {from{opacity:1} to{opacity:0;visibility:hidden}}
-  @keyframes fadeIn {from{opacity:0} to{opacity:1}}
+  #loader span {font-size:1rem;letter-spacing:0.5px;}
   @keyframes pulse {
     0%,100%{transform:scale(1);opacity:1;}
     50%{transform:scale(1.05);opacity:0.85;}
   }
+  @keyframes fadeOut {from{opacity:1}to{opacity:0;visibility:hidden}}
 
   /* ===== MENU ===== */
   nav.menu{
-    position:fixed;top:0;left:0;width:200px;height:100vh;
+    position:fixed;top:0;left:0;width:220px;height:100vh;
     background:#f1f5f9;border-right:2px solid #dde1e4;
-    padding:1rem 0.6rem 4rem 0.6rem;
+    padding:1rem 0.8rem 4rem 0.8rem;
     display:flex;flex-direction:column;gap:0.6rem;
-    justify-content:flex-start;z-index:100;
+    z-index:100;
   }
-  nav.menu h2{ text-align:center;color:#004080;font-size:1rem;margin-bottom:.7rem; }
-  nav.menu a{
-    display:block;text-decoration:none;text-align:center;
-    padding:0.6rem;border-radius:6px;
-    color:#333;font-weight:500;transition:all .2s;
+  nav.menu h2{text-align:center;color:#004080;font-size:1rem;margin-top:.6rem;margin-bottom:.6rem;}
+  nav.menu a, nav.menu input{
+    display:block;text-align:center;
+    padding:0.6rem;border-radius:6px;margin-bottom:0.4rem;
+    font-weight:500;transition:all .2s;width:100%;
+    border:1px solid #cbd5e1;background:#fff;
   }
-  nav.menu a:hover{transform:translateX(3px)}
-
-  /* === Cores dos botões === */
-  nav.menu a.h1{background:#d81e05 !important;color:#fff !important;}
-  nav.menu a.h1:hover{background:#ff5b3c !important;box-shadow:0 0 8px rgba(216,30,5,0.5);}
-  nav.menu a.h2{background:#005fb8 !important;color:#fff !important;}
-  nav.menu a.h2:hover{background:#1e90ff !important;box-shadow:0 0 8px rgba(0,95,184,0.5);}
-  nav.menu a.h3{background:#006400 !important;color:#fff !important;}
-  nav.menu a.h3:hover{background:#00a000 !important;box-shadow:0 0 8px rgba(0,100,0,0.5);}
+  nav.menu a:hover{transform:translateX(3px);box-shadow:0 0 6px rgba(0,0,0,0.15);}
+  nav.menu a.h1{background:linear-gradient(135deg,#d81e05,#ff5b3c);color:#fff;border:none;}
+  nav.menu a.h2{background:linear-gradient(135deg,#005fb8,#1e90ff);color:#fff;border:none;}
+  nav.menu a.h3{background:linear-gradient(135deg,#006400,#00a000);color:#fff;border:none;}
+  nav.menu input[type="text"]{
+    border:1px solid #cbd5e1;border-radius:6px;padding:0.5rem;
+    font-size:0.9rem;margin-top:8px;
+  }
+  nav.menu input:focus{outline:none;box-shadow:0 0 6px rgba(0,64,128,0.3);}
 
   nav.menu .voltar{
     margin-top:auto;background:#004080;color:#fff;font-weight:bold;
     border-radius:8px;padding:0.8rem;text-align:center;
     box-shadow:0 2px 4px rgba(0,0,0,0.15);
   }
-  nav.menu .voltar:hover{
-    background:#003366;box-shadow:0 0 10px rgba(0,64,128,0.6);
-  }
+  nav.menu .voltar:hover{background:#003366;box-shadow:0 0 10px rgba(0,64,128,0.6);}
 
   /* ===== CABEÇALHO ===== */
   header{
     background:#004080;color:#fff;
     display:flex;justify-content:space-between;align-items:center;
-    padding:0.5rem 2rem;margin-left:200px;
-    height:70px;
+    padding:0.5rem 2rem;margin-left:220px;height:70px;
   }
   header span{font-weight:bold;font-size:1rem;}
   header a.logo-link img{height:70px;width:auto;}
 
-  main{flex:1;padding:2rem;margin-left:200px;}
+  /* ===== CONTEÚDO ===== */
+  main{flex:1;padding:2rem;margin-left:220px;}
   .panel{
     background:#fff;border:1px solid #e0e0e0;border-radius:10px;
     padding:16px;box-shadow:0 4px 10px rgba(0,0,0,.05);
@@ -92,8 +88,9 @@
 
   footer{
     background:#eee;color:#555;text-align:center;font-size:.85rem;
-    padding:1rem;margin-left:200px;
+    padding:1rem;margin-left:220px;
   }
+  .meta{color:#5b6573;font-size:12px;margin-top:8px}
 </style>
 </head>
 
@@ -107,13 +104,31 @@
 <!-- MENU -->
 <nav class="menu">
   <h2>MENU</h2>
-  <a href="https://tirggo.github.io/radar-assessorias/" target="_blank">Horizontes</a>
   <a href="#" id="btnShowAll">Mostrar Todos</a>
   <a href="#" id="btnHideAll">Ocultar Todos</a>
   <a href="#" id="btnTop10">Top 10</a>
-  <a href="#" id="btnH1" class="h1">Filtrar H1</a>
-  <a href="#" id="btnH2" class="h2">Filtrar H2</a>
-  <a href="#" id="btnH3" class="h3">Filtrar H3</a>
+
+  <h2>Horizontes</h2>
+  <a href="#" id="btnH1" class="h1">H1</a>
+  <a href="#" id="btnH2" class="h2">H2</a>
+  <a href="#" id="btnH3" class="h3">H3</a>
+
+  <h2>Grupos</h2>
+  <a href="#" id="btnG1">G1</a>
+  <a href="#" id="btnG2">G2</a>
+  <a href="#" id="btnG3">G3</a>
+  <a href="#" id="btnG4">G4</a>
+  <a href="#" id="btnG5">G5</a>
+  <a href="#" id="btnG6">G6</a>
+
+  <h2>Tipos</h2>
+  <a href="#" id="btnASD">ASD</a>
+  <a href="#" id="btnPDI">PDI</a>
+  <a href="#" id="btnMTG">MTG</a>
+
+  <h2>Buscar</h2>
+  <input id="search" type="text" placeholder="Filtrar por nome do projeto…" />
+
   <a href="https://tirggo.github.io/home-page/#" class="voltar">⟵ Voltar</a>
 </nav>
 
@@ -146,50 +161,89 @@
 
 <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  buildRadar();
-
-  // Remove o loader após 1s
-  const loader = document.getElementById("loader");
-  setTimeout(() => {
-    loader.style.animation = "fadeOut 0.8s ease forwards";
-    setTimeout(() => loader.remove(), 800);
-  }, 1000);
+window.addEventListener("load",()=>{
+  const loader=document.getElementById("loader");
+  loader.style.animation="fadeOut 0.8s ease forwards";
+  setTimeout(()=>loader.remove(),800);
+  setTimeout(buildRadar,900);
 });
 
 function buildRadar(){
   const criteria=["Complexidade","Know-How","Abrangência","Relevância","Retorno"];
-  const projects=["1 - Ensaios de Resistência","2 - Ensaios Acústicos","3 - Valorização de Lodo","4 - Materiais Sustentáveis","5 - Canteiro Lean",
-    "6 - Construção Modular","7 - BioConstrução","8 - Gestão Preditiva","9 - Gêmeo Digital","10 - Gestão Hídrica"];
-  const vals=[[4,5,5,3,4],[4,3,4,3,4],[5,3,3,3,4],[5,3,3,3,3],[5,3,3,3,3],[5,3,2,3,4],[5,3,2,4,3],[3,3,4,3,3],[3,3,3,3,4],[2,3,4,3,4]];
-  const colors=["#d81e05","#d81e05","#d81e05","#005fb8","#005fb8","#005fb8","#006400","#006400","#006400","#006400"];
+  const projects=[
+"1 - Ensaios de Resistência e Reação ao Fogo em Sistemas Construtivos Comerciais e Industriais",
+"2 - Ensaios Acústicos e de Estanqueidade para Edificações Comerciais, Educacionais e de Saúde",
+"3 - Rota Tecnológica para Valorização de Lodo de ETE em produtos de construção",
+"4 - Análise e Especificação de Materiais Sustentáveis e de Baixo Carbono para empreendimentos",
+"5 - Assessoria em canteiro Lean Otimizado",
+"6 - Assessoria para criacao de processos otimizados de implementação de construção modular e pré-fabricada",
+"7 - Assessoria para analise e validação de Materiais Sustentáveis e BioConstrução",
+"8 - Assessoria em gestão de Ativos Preditiva (GAP)",
+"9 - Assessoria para Gêmeo Digital 'Lite' para Otimização de Processos em PMEs da Construção Civil",
+"10 - Gestão Inteligente da Água em Obras Urbanas",
+"11 - Assessoria para adoção de tecnologias digitais para Obras de Infraestruturas",
+"12 - Assessoria em Desempenho Energético e Hídrico com Foco em Resfriamento Passivo",
+"13 - Assessoria de Smart Cities para gestão de grandes obras",
+"14 - Assessoria em Conecta Canteiro 4.0",
+"15 - Assessoria para Gêmeos Digitais para Gestão Hídrica e de Energia",
+"16 - Desenvolver tecnologias e processos de construção modular e pré-fabricada para aumentar a produtividade",
+"17 - Desenvolver um sistema de Superfícies Permeáveis Inteligentes para Resiliência Urbana (Smart Permeable Surfaces)",
+"18 - Sistema Construtivo PCV-Concreto com Polímeros Sustentáveis",
+"19 - Assessoria para projetos de casa Inteligente em Condomínios",
+"20 - Plataforma para o Monitoramento Contínuo via Gêmeos Digitais para Normas de Desempenhos",
+"21 - Sistema Inteligente de Gestão Hídrica e Captação e Reuso da água pluvial urbano integrado",
+"22 - PDI: Simulador Digital de Desempenho Térmico e Acústico Integrado à NBR 15575"
+];
+  const vals=[[4,5,5,3,4],[4,3,4,3,4],[5,3,3,3,4],[5,3,3,3,3],[5,3,3,3,3],
+[5,3,2,3,4],[5,3,2,4,3],[3,3,4,3,3],[3,3,3,3,4],[2,3,4,3,4],
+[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[2,3,3,3,4],
+[3,3,2,3,3],[2,3,4,3,2],[2,4,3,3,2],[2,3,3,3,2],[1,4,4,3,1],
+[1,3,4,3,1],[1,3,2,3,1]];
+  const colors=["#d81e05","#d81e05","#d81e05","#d81e05","#d81e05","#d81e05","#d81e05",
+"#005fb8","#005fb8","#006400","#d81e05","#005fb8","#005fb8","#005fb8","#005fb8",
+"#005fb8","#005fb8","#005fb8","#005fb8","#006400","#005fb8","#005fb8"];
+  const grupos=[4,4,6,6,5,3,6,5,2,1,1,4,2,5,2,3,6,6,2,2,1,4];
+  const tipos=["MTG","MTG","PDI","ASD","ASD","ASD","ASD","ASD","ASD","PDI",
+"ASD","ASD","ASD","ASD","ASD","PDI","PDI","PDI","ASD","PDI","PDI","PDI"];
   const theta=criteria.concat([criteria[0]]);
 
   const traces=projects.map((n,i)=>{
     const r0=vals[i],r=r0.concat([r0[0]]);
-    return{
-      type:"scatterpolar",r,theta,name:n,fill:"toself",
-      opacity:0.35,line:{width:1.5,color:colors[i]},fillcolor:colors[i]+"44"
-    };
+    return{type:'scatterpolar',r,theta,name:n,fill:'toself',
+      opacity:0.3,line:{width:1,color:colors[i]},fillcolor:colors[i]+'33'};
   });
+  Plotly.newPlot('chart',traces,{margin:{l:30,r:30,t:10,b:10},showlegend:true,
+    polar:{radialaxis:{range:[0,5],dtick:1}}},{responsive:true,displaylogo:false});
 
-  const layout={
-    margin:{l:30,r:30,t:20,b:20},showlegend:true,
-    polar:{radialaxis:{range:[0,5],dtick:1}}
-  };
-  Plotly.newPlot("chart",traces,layout,{responsive:true,displaylogo:false});
+  const idx=[...Array(projects.length).keys()];
+  const filterBy=(arr,val)=>{Plotly.restyle('chart','visible',arr.map(v=>v===val?true:'legendonly'));};
 
-  // Filtros
-  document.getElementById("btnShowAll").onclick=()=>Plotly.update("chart",{visible:Array(traces.length).fill(true)});
-  document.getElementById("btnHideAll").onclick=()=>Plotly.update("chart",{visible:Array(traces.length).fill(false)});
-  document.getElementById("btnTop10").onclick=()=>Plotly.update("chart",{visible:Array(10).fill(true)});
-  const filterByColor=color=>{
-    const visible=colors.map(c=>c===color);
-    Plotly.update("chart",{visible});
+  document.getElementById('btnShowAll').onclick=()=>Plotly.restyle('chart','visible',true,idx);
+  document.getElementById('btnHideAll').onclick=()=>Plotly.restyle('chart','visible','legendonly',idx);
+  document.getElementById('btnTop10').onclick=()=>{
+    Plotly.restyle('chart','visible','legendonly',idx);
+    Plotly.restyle('chart','visible',true,idx.slice(0,10));
   };
-  document.getElementById("btnH1").onclick=()=>filterByColor("#d81e05");
-  document.getElementById("btnH2").onclick=()=>filterByColor("#005fb8");
-  document.getElementById("btnH3").onclick=()=>filterByColor("#006400");
+
+  document.getElementById('btnH1').onclick=()=>filterBy(colors,'#d81e05');
+  document.getElementById('btnH2').onclick=()=>filterBy(colors,'#005fb8');
+  document.getElementById('btnH3').onclick=()=>filterBy(colors,'#006400');
+  document.getElementById('btnG1').onclick=()=>filterBy(grupos,1);
+  document.getElementById('btnG2').onclick=()=>filterBy(grupos,2);
+  document.getElementById('btnG3').onclick=()=>filterBy(grupos,3);
+  document.getElementById('btnG4').onclick=()=>filterBy(grupos,4);
+  document.getElementById('btnG5').onclick=()=>filterBy(grupos,5);
+  document.getElementById('btnG6').onclick=()=>filterBy(grupos,6);
+  document.getElementById('btnASD').onclick=()=>filterBy(tipos,'ASD');
+  document.getElementById('btnPDI').onclick=()=>filterBy(tipos,'PDI');
+  document.getElementById('btnMTG').onclick=()=>filterBy(tipos,'MTG');
+
+  // Filtro por busca
+  document.getElementById('search').addEventListener('input',e=>{
+    const q=e.target.value.toLowerCase().trim();
+    const vis=idx.map(i=>projects[i].toLowerCase().includes(q)?true:'legendonly');
+    Plotly.restyle('chart','visible',vis);
+  });
 }
 </script>
 </body>
