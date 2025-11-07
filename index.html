@@ -1,124 +1,115 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Radar – Portfólio de Assessorias (V06)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radar – Portfólio de Assessorias | Instituto SENAI-SP</title>
+
 <style>
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    background:#f9f9f9;
-    color:#333;
-    min-height:100vh;
-  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Segoe UI",sans-serif;background:#f9f9f9;color:#333;}
 
   /* ===== MENU ===== */
   nav.menu{
-    position:fixed;top:0;left:0;width:200px;height:100vh;
+    position:fixed;top:0;left:0;width:190px;height:100vh;
     background:#f1f5f9;border-right:2px solid #dde1e4;
-    padding:10px 8px;display:flex;flex-direction:column;
-    gap:6px;overflow-y:auto;z-index:100;
+    padding:1rem 0.6rem;display:flex;flex-direction:column;gap:0.5rem;
+    overflow-y:auto;
   }
-  nav.menu h2{
-    text-align:center;color:#004080;font-size:.9rem;
-    margin:8px 0 4px;font-weight:bold;
+  nav.menu h2{text-align:center;color:#004080;font-size:1rem;margin-bottom:.6rem;}
+  nav.menu a{
+    display:block;text-decoration:none;text-align:left;
+    padding:0.5rem;border-radius:6px;color:#333;font-weight:bold;
+    transition:all .2s;line-height:1.3;
   }
-  nav.menu button, nav.menu a{
-    display:block;text-align:center;width:100%;border:none;cursor:pointer;
-    padding:.5rem;border-radius:6px;border:1px solid #cbd5e1;
-    background:#fff;font-weight:bold;color:#1f2937;font-size:.85rem;
-    transition:box-shadow .15s,transform .15s;
-  }
-  nav.menu button:hover{transform:translateX(2px);box-shadow:0 0 6px rgba(0,0,0,.15);}
+  nav.menu a:hover{transform:translateX(3px);}
   nav.menu .voltar{
-    margin-top:auto;background:#004080;color:#fff;border:none;
+    margin-top:1rem;background:#004080;color:#fff;text-align:center;
+    border-radius:8px;padding:0.6rem;font-weight:bold;
   }
 
-  /* ===== CABEÇALHO / RODAPÉ ===== */
-  header, footer{
-    margin-left:200px;background:#004080;color:#fff;
-    padding:10px 16px;font-weight:600;
-  }
-  footer{
-    background:#eee;color:#555;font-weight:400;text-align:center;
-  }
-  main{margin-left:200px;padding:16px;}
-  .panel{
-    background:#fff;border:1px solid #e0e0e0;border-radius:10px;
-    padding:12px;
-  }
+  /* ===== BOTÕES HORIZONTES ===== */
+  nav.menu a.h1{background:#d81e05;color:#fff;}
+  nav.menu a.h2{background:#005fb8;color:#fff;}
+  nav.menu a.h3{background:#006400;color:#fff;}
+  nav.menu a.h1:hover{background:#ff4d36;}
+  nav.menu a.h2:hover{background:#1e90ff;}
+  nav.menu a.h3:hover{background:#009933;}
 
-  /* ===== LEGENDAS ===== */
-  .legend{display:flex;gap:10px;font-size:12px;color:#374151;margin:6px 0;}
-  .badge{display:inline-flex;align-items:center;gap:6px}
-  .badge i{width:12px;height:12px;border-radius:3px;display:inline-block;}
+  /* ===== BOTÕES TIPO ===== */
+  nav.menu a.asd{background:#2e8b57;color:#fff;}
+  nav.menu a.pdi{background:#1e90ff;color:#fff;}
+  nav.menu a.mtg{background:#f4a300;color:#fff;}
+  nav.menu a.asd:hover{background:#3cb371;}
+  nav.menu a.pdi:hover{background:#63b8ff;}
+  nav.menu a.mtg:hover{background:#ffbf33;}
+
+  /* ===== CABEÇALHO ===== */
+  header{
+    background:#004080;color:#fff;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:0.8rem 2rem;margin-left:190px;
+  }
+  header h1{font-size:1.2rem;font-weight:bold;}
+  header img{height:60px;width:auto;}
+
+  /* ===== CONTEÚDO ===== */
+  main{padding:2rem;margin-left:190px;}
+  .panel{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:1rem;}
   #chart{width:100%;height:780px;}
 
-  /* ===== RÓTULO ATIVO ===== */
-  #filtroAtivo{
-    text-align:center;font-weight:700;margin:4px 0 10px;
-    font-size:1rem;color:#444;opacity:1;transition:opacity .8s ease;
+  .legend{font-size:12px;color:#374151;margin-bottom:6px;display:flex;gap:10px;}
+  .badge{display:inline-flex;align-items:center;gap:6px;}
+  .badge i{width:12px;height:12px;border-radius:3px;}
+  #filtroAtivo{text-align:center;font-weight:bold;margin-bottom:10px;}
+
+  footer{
+    background:#eee;color:#555;text-align:center;font-size:.85rem;
+    padding:1rem;margin-left:190px;
   }
-  #filtroAtivo.fade-out{opacity:0;}
-
-  /* ===== LINHAS DE BOTÕES ===== */
-  .row{display:flex;justify-content:space-between;gap:4px;}
-  .row button{flex:1;padding:8px;font-size:.8rem;border-radius:6px;}
-
-  /* ===== CORES DOS BOTÕES ===== */
-  #btnH1{background:#d81e05;color:#fff;}
-  #btnH2{background:#005fb8;color:#fff;}
-  #btnH3{background:#006400;color:#fff;}
-  #btnASD{background:#2e8b57;color:#fff;}
-  #btnPDI{background:#1e90ff;color:#fff;}
-  #btnMTG{background:#f4a300;color:#fff;}
-
-  body.full nav.menu{transform:translateX(-220px);}
-  body.full header, body.full footer{display:none;}
-  body.full main{margin-left:0;padding:8px;}
-  body.full #chart{height:90vh;}
 </style>
 </head>
+
 <body>
 
 <!-- MENU LATERAL -->
-<nav class="menu" id="sideMenu">
-  <h2>MENU</h2>
-  <button id="btnShowAll">Mostrar Todos</button>
-  <button id="btnHideAll">Ocultar Todos</button>
-  <button id="btnPresentation">Modo Apresentação</button>
+<nav class="menu">
+  <h2>FILTROS</h2>
+  <a href="#" id="btnShowAll">Mostrar Todos</a>
+  <a href="#" id="btnHideAll">Ocultar Todos</a>
 
   <h2>Horizontes</h2>
-  <div class="row">
-    <button id="btnH1">H1</button>
-    <button id="btnH2">H2</button>
-    <button id="btnH3">H3</button>
+  <div style="display:flex;gap:6px;justify-content:center;">
+    <a href="#" id="btnH1" class="h1" title="Horizonte 1">H1</a>
+    <a href="#" id="btnH2" class="h2" title="Horizonte 2">H2</a>
+    <a href="#" id="btnH3" class="h3" title="Horizonte 3">H3</a>
   </div>
 
   <h2>Grupos</h2>
-  <button id="btnG1">🏗️ Obras de Infraestrutura</button>
-  <button id="btnG2">💻 Digitalização da Construção</button>
-  <button id="btnG3">🏠 Construção Industrializada</button>
-  <button id="btnG4">🔊 Desempenho, Segurança, Conforto Acústico e Térmico</button>
-  <button id="btnG5">🧰 Serviços para Construtoras</button>
-  <button id="btnG6">🌿 Materiais Sustentáveis</button>
+  <a href="#" id="btnG1">🏗️ Obras de Infraestrutura</a>
+  <a href="#" id="btnG2">💻 Digitalização da Construção</a>
+  <a href="#" id="btnG3">🏠 Construção Industrializada</a>
+  <a href="#" id="btnG4">🔊 Desempenho, Segurança, Conforto Acústico e Térmico</a>
+  <a href="#" id="btnG5">🧰 Serviços para Construtoras</a>
+  <a href="#" id="btnG6">🌿 Materiais Sustentáveis</a>
 
   <h2>Tipos</h2>
-  <div class="row">
-    <button id="btnASD">ASD</button>
-    <button id="btnPDI">PDI</button>
-    <button id="btnMTG">MTG</button>
+  <div style="display:flex;gap:6px;justify-content:center;">
+    <a href="#" id="btnASD" class="asd">ASD</a>
+    <a href="#" id="btnPDI" class="pdi">PDI</a>
+    <a href="#" id="btnMTG" class="mtg">MTG</a>
   </div>
 
   <a href="https://tirggo.github.io/home-page/#" class="voltar">⟵ Voltar</a>
 </nav>
 
+<!-- CABEÇALHO -->
 <header>
-  <span>INSTITUTO SENAI DE TECNOLOGIA DA CONSTRUÇÃO CIVIL - SENAI-SP</span>
+  <h1>INSTITUTO SENAI DE TECNOLOGIA DA CONSTRUÇÃO CIVIL</h1>
+  <img src="dt_senai.png" alt="Distrito Tecnológico SENAI-SP">
 </header>
 
+<!-- CONTEÚDO -->
 <main>
   <div class="panel">
     <div id="filtroAtivo"></div>
@@ -128,117 +119,120 @@
       <span class="badge"><i style="background:#006400"></i>H3</span>
     </div>
     <div id="chart"></div>
+    <div class="meta">Clique na legenda para ativar/desativar projetos. Eixo radial: 0–5.</div>
   </div>
 </main>
 
 <footer>
   <strong>Distrito Tecnológico do SENAI-SP</strong><br>
-  Desenvolvido pelo Distrito Tecnológico do SENAI-SP — Unidade São Bernardo do Campo<br>
-  © 2025 | Infográfico público para fins institucionais e educacionais
+  Unidade São Bernardo do Campo — 2025<br>
+  Infográfico público para fins institucionais e educacionais.
 </footer>
 
-<!-- === PLOTLY === -->
+<!-- PLOTLY -->
 <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 <script>
-(function(){
-  const criteria=["Complexidade","Know-How","Abrangência","Relevância","Retorno"];
-  const projects=[
-    "1 - Ensaios de Resistência e Reação ao Fogo em Sistemas Construtivos Comerciais e Industriais",
-    "2 - Ensaios Acústicos e de Estanqueidade para Edificações Comerciais, Educacionais e de Saúde",
-    "3 - Rota Tecnológica para Valorização de Lodo de ETE em produtos de construção",
-    "4 - Análise e Especificação de Materiais Sustentáveis e de Baixo Carbono para empreendimentos",
-    "5 - Assessoria em canteiro Lean Otimizado",
-    "6 - Assessoria para criacao de processos otimizados de implementação de construção modular e pré-fabricada",
-    "7 - Assessoria para analise e validação de Materiais Sustentáveis e BioConstrução",
-    "8 - Assessoria em gestão de Ativos Preditiva (GAP)",
-    "9 - Assessoria para Gêmeo Digital \"Lite\" para Otimização de ProcessOS em PMEs da Construção Civil",
-    "10 - Gestão Inteligente da Água em Obras UrbanAS",
-    "11 - Assessoria para adoção de tecnologias digitais para Obras de Infraestruturas",
-    "12 - Assessoria em Desempenho Energético e Hídrico com Foco em Resfriamento Passivo",
-    "13 - Assessoria de Smart Cities para getão de grandes de obra",
-    "14 - Assessoria em Conecta Canteiro 4.0",
-    "15 - Assessoria para Gêmeos Digitais para Gestão Hídrica e de Energia",
-    "16 - Desenvolver tecnologias e processos de construção modular e pré-fabricada para aumentar a produtividade",
-    "17 - Desenvolver um sistema de Superfícies Permeáveis Inteligentes para Resiliência Urbana (Smart Permeable Surfaces)",
-    "18 - Sistema Construtivo PCV-Concreto com Polímeros Sustentáveis",
-    "19 - Assessoria para projetos de casa Inteligente em Condomínios",
-    "20 - Plataforma para o Monitoramento Contínuo via Gêmeos Digitais para Normas de Desempenhos",
-    "21 - Sistema Inteligente de Gestão Hídrica e Captação e Reuso da água pluvial urbano integrado",
-    "22 - PDI: Simulador Digital de Desempenho Térmico e Acústico Integrado à NBR 15575"
-  ];
-  const vals=[
-    [4,5,5,3,4],[4,3,4,3,4],[5,3,3,3,4],[5,3,3,3,3],[5,3,3,3,3],
-    [5,3,2,3,4],[5,3,2,4,3],[3,3,4,3,3],[3,3,3,3,4],[2,3,4,3,4],
-    [3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[2,3,3,3,4],
-    [3,3,2,3,3],[2,3,4,3,2],[2,4,3,3,2],[2,3,3,3,2],[1,4,4,3,1],
-    [1,3,4,3,1],[1,3,2,3,1]
-  ];
-  const colors=[
-    "#d81e05","#d81e05","#d81e05","#d81e05","#d81e05","#d81e05","#d81e05","#005fb8","#005fb8","#006400",
-    "#d81e05","#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#006400",
-    "#005fb8","#005fb8"
-  ];
-  const grupos=[1,4,6,6,5,3,6,5,2,1,1,4,2,5,2,3,6,6,2,2,1,4];
-  const tipos=["MTG","MTG","PDI","ASD","ASD","ASD","ASD","ASD","ASD","PDI","ASD","ASD","ASD","ASD","ASD","PDI","PDI","PDI","ASD","PDI","PDI","PDI"];
+const criteria=["Complexidade","Know-How","Abrangência","Relevância","Retorno"];
+const projects=[
+"1 - Ensaios de Resistência e Reação ao Fogo em Sistemas Construtivos Comerciais e Industriais",
+"2 - Ensaios Acústicos e de Estanqueidade para Edificações Comerciais, Educacionais e de Saúde",
+"3 - Rota Tecnológica para Valorização de Lodo de ETE em produtos de construção",
+"4 - Análise e Especificação de Materiais Sustentáveis e de Baixo Carbono para empreendimentos",
+"5 - Assessoria em canteiro Lean Otimizado",
+"6 - Assessoria para criação de processos otimizados de construção modular e pré-fabricada",
+"7 - Assessoria para análise e validação de Materiais Sustentáveis e BioConstrução",
+"8 - Assessoria em gestão de Ativos Preditiva (GAP)",
+"9 - Assessoria para Gêmeo Digital \"Lite\" para PMEs da Construção Civil",
+"10 - Gestão Inteligente da Água em Obras Urbanas",
+"11 - Assessoria para adoção de tecnologias digitais em Obras de Infraestrutura",
+"12 - Assessoria em Desempenho Energético e Hídrico com Foco em Resfriamento Passivo",
+"13 - Assessoria de Smart Cities para gestão de grandes obras",
+"14 - Assessoria em Conecta Canteiro 4.0",
+"15 - Assessoria para Gêmeos Digitais para Gestão Hídrica e de Energia",
+"16 - Desenvolver tecnologias e processos de construção modular e pré-fabricada para produtividade",
+"17 - Sistema de Superfícies Permeáveis Inteligentes (Smart Permeable Surfaces)",
+"18 - Sistema Construtivo PCV-Concreto com Polímeros Sustentáveis",
+"19 - Assessoria para projetos de casa Inteligente em Condomínios",
+"20 - Plataforma para Monitoramento Contínuo via Gêmeos Digitais para Normas de Desempenho",
+"21 - Sistema Inteligente de Gestão Hídrica e Reuso da Água Pluvial Urbana Integrado",
+"22 - PDI: Simulador Digital de Desempenho Térmico e Acústico Integrado à NBR 15575"
+];
 
-  const theta=criteria.concat([criteria[0]]);
-  const traces=projects.map((n,i)=>{
-    const r=vals[i].concat([vals[i][0]]);
-    return {type:'scatterpolar',r,theta,name:n,fill:'toself',opacity:0.3,line:{width:1,color:colors[i]},fillcolor:colors[i]+'33'};
-  });
-  Plotly.newPlot('chart',traces,{showlegend:true,polar:{radialaxis:{range:[0,5],dtick:1}},margin:{l:30,r:30,t:10,b:10}},{responsive:true,displaylogo:false});
+const vals=[
+[4,5,5,3,4],[4,3,4,3,4],[5,3,3,3,4],[5,3,3,3,3],[5,3,3,3,3],
+[5,3,2,3,4],[5,3,2,4,3],[3,3,4,3,3],[3,3,3,3,4],[2,3,4,3,4],
+[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[2,3,3,3,4],
+[3,3,2,3,3],[2,3,4,3,2],[2,4,3,3,2],[2,3,3,3,2],[1,4,4,3,1],
+[1,3,4,3,1],[1,3,2,3,1]
+];
 
-  const filtroAtivo=document.getElementById('filtroAtivo');
-  const setLabel=(txt,cor)=>{
-    filtroAtivo.classList.add('fade-out');
-    setTimeout(()=>{filtroAtivo.textContent=txt||'';filtroAtivo.style.color=cor||'#444';filtroAtivo.classList.remove('fade-out');},250);
-  };
-  const updateVisible=(arr,cond)=>{Plotly.restyle('chart','visible',arr.map(v=>v===cond?true:'legendonly'));}
-  const on=(id,fn)=>document.getElementById(id)?.addEventListener('click',e=>{e.preventDefault();fn();});
+const colors=[
+"#d81e05","#d81e05","#d81e05","#d81e05","#d81e05","#d81e05","#d81e05",
+"#005fb8","#005fb8","#006400","#d81e05","#005fb8","#005fb8","#005fb8",
+"#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#006400","#005fb8","#005fb8"
+];
 
-  // === Filtros Gerais ===
-  on('btnShowAll',()=>{Plotly.restyle('chart','visible',true);setLabel('',null);});
-  on('btnHideAll',()=>Plotly.restyle('chart','visible','legendonly'));
+const grupos=[4,4,6,6,5,3,6,5,2,1,1,4,2,5,2,3,6,6,2,2,1,4];
+const tipos=["MTG","MTG","PDI","ASD","ASD","ASD","ASD","ASD","ASD","PDI","ASD","ASD","ASD","ASD","ASD","PDI","PDI","PDI","ASD","PDI","PDI","PDI"];
 
-  // === Horizontes ===
-  on('btnH1',()=>{updateVisible(colors,'#d81e05');setLabel('Horizonte 1 – Curto Prazo','#d81e05');});
-  on('btnH2',()=>{updateVisible(colors,'#005fb8');setLabel('Horizonte 2 – Médio Prazo','#005fb8');});
-  on('btnH3',()=>{updateVisible(colors,'#006400');setLabel('Horizonte 3 – Longo Prazo','#006400');});
+const theta=criteria.concat([criteria[0]]);
+const traces=projects.map((n,i)=>{
+ const r=vals[i].concat([vals[i][0]]);
+ return{type:'scatterpolar',r,theta,name:n,fill:'toself',opacity:0.25,line:{width:1.2,color:colors[i]},fillcolor:colors[i]+'33'};
+});
+const layout={margin:{l:30,r:30,t:10,b:10},showlegend:true,polar:{radialaxis:{range:[0,5],dtick:1}}};
+Plotly.newPlot('chart',traces,layout,{responsive:true,displaylogo:false});
 
-  // === Grupos ===
-  on('btnG1',()=>{updateVisible(grupos,1);setLabel('Obras de Infraestrutura','#333');});
-  on('btnG2',()=>{updateVisible(grupos,2);setLabel('Digitalização da Construção','#333');});
-  on('btnG3',()=>{updateVisible(grupos,3);setLabel('Construção Industrializada','#333');});
-  on('btnG4',()=>{updateVisible(grupos,4);setLabel('Desempenho, Segurança, Conforto Acústico e Térmico','#333');});
-  on('btnG5',()=>{updateVisible(grupos,5);setLabel('Serviços para Construtoras','#333');});
-  on('btnG6',()=>{updateVisible(grupos,6);setLabel('Materiais Sustentáveis','#333');});
+function atualizarFiltroAtivo(txt,cor){
+ const el=document.getElementById("filtroAtivo");
+ el.textContent=txt;
+ el.style.color=cor;
+}
 
-  // === Tipos ===
-  on('btnASD',()=>{updateVisible(tipos,'ASD');setLabel('Assessoria Direta','#2e8b57');});
-  on('btnPDI',()=>{updateVisible(tipos,'PDI');setLabel('Pesquisa, Desenvolvimento e Inovação','#1e90ff');});
-  on('btnMTG',()=>{updateVisible(tipos,'MTG');setLabel('Metrologia','#f4a300');});
+document.getElementById("btnShowAll").onclick=()=>{
+ Plotly.update("chart",{visible:Array(traces.length).fill(true)});
+ atualizarFiltroAtivo("Mostrando todos os projetos","#333");
+};
+document.getElementById("btnHideAll").onclick=()=>{
+ Plotly.update("chart",{visible:Array(traces.length).fill(false)});
+ atualizarFiltroAtivo("Todos ocultos","#999");
+};
 
-  // === Modo Apresentação ===
-  on('btnPresentation',()=>{
-    const body=document.body;
-    if(!body.classList.contains('full')){
-      body.classList.add('full');
-      Plotly.relayout('chart',{showlegend:false});
-      (document.documentElement.requestFullscreen||(()=>{}))();
-    } else {
-      body.classList.remove('full');
-      Plotly.relayout('chart',{showlegend:true});
-      (document.exitFullscreen||(()=>{}))();
-    }
-  });
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'&&document.body.classList.contains('full')){
-      document.body.classList.remove('full');
-      Plotly.relayout('chart',{showlegend:true});
-      (document.exitFullscreen||(()=>{}))();
-    }
-  });
-})();
+const filterBy=(array,value,label,color)=>{
+ const vis=array.map(v=>v===value);
+ Plotly.update("chart",{visible:vis});
+ atualizarFiltroAtivo(label,color);
+};
+
+// Horizontes
+document.getElementById("btnH1").onclick=()=>filterBy(colors,"#d81e05","Horizonte 1","#d81e05");
+document.getElementById("btnH2").onclick=()=>filterBy(colors,"#005fb8","Horizonte 2","#005fb8");
+document.getElementById("btnH3").onclick=()=>filterBy(colors,"#006400","Horizonte 3","#006400");
+
+// Grupos
+const gruposNomes=["🏗️ Obras de Infraestrutura","💻 Digitalização da Construção","🏠 Construção Industrializada","🔊 Desempenho, Segurança, Conforto Acústico e Térmico","🧰 Serviços para Construtoras","🌿 Materiais Sustentáveis"];
+for(let i=1;i<=6;i++){
+ document.getElementById("btnG"+i).onclick=()=>filterBy(grupos,i,gruposNomes[i-1],"#333");
+}
+
+// Tipos
+document.getElementById("btnASD").onclick=()=>filterBy(tipos,"ASD","ASD – Assessoria Direta","#2e8b57");
+document.getElementById("btnPDI").onclick=()=>filterBy(tipos,"PDI","PDI – Pesquisa, Desenvolvimento e Inovação","#1e90ff");
+document.getElementById("btnMTG").onclick=()=>filterBy(tipos,"MTG","MTG – Metrologia","#f4a300");
+
+// Modo apresentação (ESC para sair)
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"){
+   const menu=document.querySelector("nav.menu");
+   menu.style.display=menu.style.display==="none"?"flex":"none";
+   const footer=document.querySelector("footer");
+   footer.style.display=footer.style.display==="none"?"block":"none";
+   const header=document.querySelector("header");
+   header.style.display=header.style.display==="none"?"flex":"none";
+   const el=document.getElementById("filtroAtivo");
+   el.style.display=menu.style.display==="none"?"block":"none";
+ }
+});
 </script>
 </body>
 </html>
