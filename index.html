@@ -27,9 +27,7 @@
     filter:drop-shadow(0 0 8px rgba(255,255,255,0.6));
     animation:pulse 2s infinite ease-in-out;
   }
-  #loader span {
-    font-size:1rem;letter-spacing:0.5px;
-  }
+  #loader span { font-size:1rem;letter-spacing:0.5px; }
 
   @keyframes fadeOut {from{opacity:1} to{opacity:0;visibility:hidden}}
   @keyframes fadeIn {from{opacity:0} to{opacity:1}}
@@ -37,23 +35,16 @@
     0%,100%{transform:scale(1);opacity:1;}
     50%{transform:scale(1.05);opacity:0.85;}
   }
-  @keyframes fadeSlideIn {
-    0% {opacity:0;transform:translateY(10px);}
-    100% {opacity:1;transform:translateY(0);}
-  }
 
-  /* ===== MENU LATERAL ===== */
+  /* ===== MENU ===== */
   nav.menu{
     position:fixed;top:0;left:0;width:200px;height:100vh;
     background:#f1f5f9;border-right:2px solid #dde1e4;
     padding:1rem 0.6rem 4rem 0.6rem;
     display:flex;flex-direction:column;gap:0.6rem;
     justify-content:flex-start;z-index:100;
-    animation:fadeSlideIn 0.8s ease 0.2s both;
   }
-  nav.menu h2{
-    text-align:center;color:#004080;font-size:1rem;margin-bottom:.7rem;
-  }
+  nav.menu h2{ text-align:center;color:#004080;font-size:1rem;margin-bottom:.7rem; }
   nav.menu a{
     display:block;text-decoration:none;text-align:center;
     padding:0.6rem;border-radius:6px;
@@ -61,7 +52,7 @@
   }
   nav.menu a:hover{transform:translateX(3px)}
 
-  /* === Cores dos botões H1, H2, H3 no MENU === */
+  /* === Cores dos botões === */
   nav.menu a.h1{background:#d81e05 !important;color:#fff !important;}
   nav.menu a.h1:hover{background:#ff5b3c !important;box-shadow:0 0 8px rgba(216,30,5,0.5);}
   nav.menu a.h2{background:#005fb8 !important;color:#fff !important;}
@@ -70,15 +61,12 @@
   nav.menu a.h3:hover{background:#00a000 !important;box-shadow:0 0 8px rgba(0,100,0,0.5);}
 
   nav.menu .voltar{
-    margin-top:auto;
-    background:#004080;color:#fff;font-weight:bold;
+    margin-top:auto;background:#004080;color:#fff;font-weight:bold;
     border-radius:8px;padding:0.8rem;text-align:center;
     box-shadow:0 2px 4px rgba(0,0,0,0.15);
   }
   nav.menu .voltar:hover{
-    background:#003366;
-    box-shadow:0 0 10px rgba(0,64,128,0.6);
-    transform:none;
+    background:#003366;box-shadow:0 0 10px rgba(0,64,128,0.6);
   }
 
   /* ===== CABEÇALHO ===== */
@@ -87,34 +75,25 @@
     display:flex;justify-content:space-between;align-items:center;
     padding:0.5rem 2rem;margin-left:200px;
     height:70px;
-    animation:fadeSlideIn 1s ease 0.8s both;
   }
   header span{font-weight:bold;font-size:1rem;}
   header a.logo-link img{height:70px;width:auto;}
 
-  /* ===== CONTEÚDO ===== */
-  main{flex:1;padding:2rem;margin-left:200px;animation:fadeSlideIn 1s ease 1s both;}
+  main{flex:1;padding:2rem;margin-left:200px;}
   .panel{
     background:#fff;border:1px solid #e0e0e0;border-radius:10px;
     padding:16px;box-shadow:0 4px 10px rgba(0,0,0,.05);
-    animation:fadeSlideIn 1s ease 1.4s both;
   }
-  #chart{width:100%;height:780px;animation:fadeSlideIn 1s ease 2s both;}
+  #chart{width:100%;height:780px;}
 
-  .legend{
-    display:flex;gap:10px;font-size:12px;color:#374151;margin-bottom:6px;
-    opacity:0;animation:fadeIn 1s ease 1.6s forwards;
-  }
+  .legend{display:flex;gap:10px;font-size:12px;color:#374151;margin-bottom:6px;}
   .badge{display:inline-flex;align-items:center;gap:6px}
   .badge i{width:12px;height:12px;border-radius:3px}
 
   footer{
     background:#eee;color:#555;text-align:center;font-size:.85rem;
     padding:1rem;margin-left:200px;
-    animation:fadeSlideIn 1s ease 2.2s both;
   }
-
-  .meta{color:#5b6573;font-size:12px;margin-top:8px}
 </style>
 </head>
 
@@ -165,14 +144,17 @@
   © 2025 | Infográfico público para fins institucionais e educacionais
 </footer>
 
-<!-- Plotly -->
 <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 <script>
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
+  buildRadar();
+
+  // Remove o loader após 1s
   const loader = document.getElementById("loader");
-  loader.style.animation = "fadeOut 0.8s ease forwards";
-  setTimeout(() => loader.remove(), 800);
-  setTimeout(buildRadar, 900);
+  setTimeout(() => {
+    loader.style.animation = "fadeOut 0.8s ease forwards";
+    setTimeout(() => loader.remove(), 800);
+  }, 1000);
 });
 
 function buildRadar(){
@@ -187,23 +169,23 @@ function buildRadar(){
     const r0=vals[i],r=r0.concat([r0[0]]);
     return{
       type:"scatterpolar",r,theta,name:n,fill:"toself",
-      opacity:0.3,line:{width:1,color:colors[i]},fillcolor:colors[i]+"33"
+      opacity:0.35,line:{width:1.5,color:colors[i]},fillcolor:colors[i]+"44"
     };
   });
 
   const layout={
-    margin:{l:30,r:30,t:10,b:10},showlegend:true,
+    margin:{l:30,r:30,t:20,b:20},showlegend:true,
     polar:{radialaxis:{range:[0,5],dtick:1}}
   };
   Plotly.newPlot("chart",traces,layout,{responsive:true,displaylogo:false});
 
-  // === Filtros corrigidos ===
-  document.getElementById("btnShowAll").onclick=()=>Plotly.restyle("chart","visible",true);
-  document.getElementById("btnHideAll").onclick=()=>Plotly.restyle("chart","visible","legendonly");
-  document.getElementById("btnTop10").onclick=()=>Plotly.restyle("chart","visible",true,[...Array(10).keys()]);
-  const filterByColor=(color)=>{
-    const visibles=colors.map(c=>c===color);
-    Plotly.restyle("chart","visible",visibles);
+  // Filtros
+  document.getElementById("btnShowAll").onclick=()=>Plotly.update("chart",{visible:Array(traces.length).fill(true)});
+  document.getElementById("btnHideAll").onclick=()=>Plotly.update("chart",{visible:Array(traces.length).fill(false)});
+  document.getElementById("btnTop10").onclick=()=>Plotly.update("chart",{visible:Array(10).fill(true)});
+  const filterByColor=color=>{
+    const visible=colors.map(c=>c===color);
+    Plotly.update("chart",{visible});
   };
   document.getElementById("btnH1").onclick=()=>filterByColor("#d81e05");
   document.getElementById("btnH2").onclick=()=>filterByColor("#005fb8");
