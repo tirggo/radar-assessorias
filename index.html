@@ -1,165 +1,150 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radar – Horizontes | Instituto SENAI-SP</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Radar – Portfólio de Assessorias (V06)</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:"Segoe UI",sans-serif;
-  background:#f9f9f9;color:#333;
-  overflow-x:hidden;
-  min-height:100vh;
-}
-
-/* ===== LOADER ===== */
-#loader {
-  position:fixed;top:0;left:0;width:100%;height:100vh;
-  background:linear-gradient(180deg,#004080 0%,#0a589b 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:#fff;z-index:1000;
-}
-#loader img {height:90px;width:auto;margin-bottom:16px;filter:drop-shadow(0 0 8px rgba(255,255,255,0.6));animation:pulse 2s infinite ease-in-out;}
-#loader span {font-size:1rem;letter-spacing:0.5px;}
-@keyframes fadeOut {from{opacity:1}to{opacity:0;visibility:hidden}}
-@keyframes pulse {0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.05);opacity:0.85;}}
-
-/* ===== MENU ===== */
-nav.menu{
-  position:fixed;top:0;left:0;width:200px;height:100vh;
-  background:#f1f5f9;border-right:2px solid #dde1e4;
-  padding:0.8rem 0.6rem 1rem 0.6rem;
-  display:flex;flex-direction:column;gap:0.4rem;
-  z-index:100;overflow-y:auto;
-  scrollbar-width:thin;scrollbar-color:#004080 #f1f5f9;
-  transition:transform 0.4s ease;
-}
-nav.menu::-webkit-scrollbar{width:6px;}
-nav.menu::-webkit-scrollbar-thumb{background:#004080;border-radius:6px;}
-nav.menu::-webkit-scrollbar-track{background:#f1f5f9;}
-nav.menu h2{text-align:center;color:#004080;font-size:0.9rem;margin:0.4rem 0;}
-nav.menu a{
-  display:block;text-decoration:none;text-align:center;
-  padding:0.5rem;border-radius:6px;margin-bottom:0.3rem;
-  font-size:0.85rem;transition:all .2s;width:100%;
-  border:1px solid #cbd5e1;background:#fff;
-}
-nav.menu a:hover{transform:translateX(2px);box-shadow:0 0 4px rgba(0,0,0,0.15);}
-nav.menu a.h1{background:linear-gradient(135deg,#d81e05,#ff5b3c);color:#fff;border:none;}
-nav.menu a.h2{background:linear-gradient(135deg,#005fb8,#1e90ff);color:#fff;border:none;}
-nav.menu a.h3{background:linear-gradient(135deg,#006400,#00a000);color:#fff;border:none;}
-nav.menu .voltar{margin-top:auto;background:#004080;color:#fff;font-weight:bold;border-radius:8px;padding:0.6rem;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.15);}
-nav.menu .voltar:hover{background:#003366;box-shadow:0 0 10px rgba(0,64,128,0.6);}
-nav.menu.hidden{transform:translateX(-220px);}
-
-/* ===== BOTÃO FLUTUANTE MENU ===== */
-#menuToggle {
-  position: fixed;
-  top: 14px;
-  left: 14px;
-  background: #004080;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 12px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 200;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
-  transition: all 0.3s ease;
-}
-#menuToggle:hover {background:#003366;box-shadow:0 0 8px rgba(0,64,128,0.6);}
-body.full #menuToggle{opacity:0.9;pointer-events:auto;display:block;}
-
-/* ===== CABEÇALHO ===== */
-header{
-  background:#004080;color:#fff;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:0.5rem 2rem;margin-left:200px;height:70px;
-}
-header span{font-weight:bold;font-size:1rem;}
-header a.logo-link img{height:70px;width:auto;}
-
-/* ===== CONTEÚDO ===== */
-main{flex:1;padding:2rem;margin-left:200px;}
-.panel{
-  background:#fff;border:1px solid #e0e0e0;border-radius:10px;
-  padding:16px;box-shadow:0 4px 10px rgba(0,0,0,.05);
-}
-#chart{width:100%;height:780px;}
-.legend{display:flex;gap:10px;font-size:12px;color:#374151;margin-bottom:6px;}
-.badge{display:inline-flex;align-items:center;gap:6px}
-.badge i{width:12px;height:12px;border-radius:3px}
-
-/* ===== RODAPÉ ===== */
-footer{
-  background:#eee;color:#555;text-align:center;font-size:.85rem;
-  padding:1rem;margin-left:200px;
-}
-
-/* ===== MODO APRESENTAÇÃO ===== */
-body.full nav.menu{transform:translateX(-220px);}
-body.full footer,body.full header{display:none;}
-body.full #chart{height:90vh;}
-body.full .legend{display:none;}
-body.full main{margin-left:0;padding:1rem;}
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:#f9f9f9;
+    color:#333;
+    min-height:100vh;
+  }
+  nav.menu{
+    position:fixed;
+    top:0;left:0;
+    width:200px;height:100vh;
+    background:#f1f5f9;
+    border-right:2px solid #dde1e4;
+    padding:10px 8px;
+    display:flex;flex-direction:column;
+    gap:6px;
+    overflow-y:auto;
+    z-index:100;
+  }
+  nav.menu h2{
+    text-align:center;
+    color:#004080;
+    font-size:.9rem;
+    margin:8px 0 4px;
+  }
+  nav.menu a, nav.menu button{
+    display:block;
+    text-align:center;
+    width:100%;
+    border:none;
+    cursor:pointer;
+    padding:.5rem;
+    border-radius:6px;
+    border:1px solid #cbd5e1;
+    background:#fff;
+    font-weight:bold;
+    color:#1f2937;
+    font-size:.87rem;
+    transition:box-shadow .15s, transform .15s;
+  }
+  nav.menu a:hover, nav.menu button:hover{
+    transform:translateX(2px);
+    box-shadow:0 0 6px rgba(0,0,0,.15);
+  }
+  nav.menu .voltar{
+    margin-top:auto;
+    background:#004080;
+    color:#fff;
+    border:none;
+  }
+  header, footer{
+    margin-left:200px;
+    background:#004080;
+    color:#fff;
+    padding:10px 16px;
+    font-weight:600;
+  }
+  footer{
+    background:#eee;
+    color:#555;
+    font-weight:400;
+    text-align:center;
+  }
+  main{margin-left:200px;padding:16px;}
+  .panel{
+    background:#fff;
+    border:1px solid #e0e0e0;
+    border-radius:10px;
+    padding:12px;
+  }
+  .legend{
+    display:flex;
+    gap:10px;
+    font-size:12px;
+    color:#374151;
+    margin:6px 0;
+  }
+  .badge{display:inline-flex;align-items:center;gap:6px;}
+  .badge i{width:12px;height:12px;border-radius:3px;display:inline-block;}
+  #chart{width:100%;height:780px;}
+  #filtroAtivo{
+    text-align:center;
+    font-weight:700;
+    margin:4px 0 10px;
+    font-size:1rem;
+    color:#444;
+    opacity:1;
+    transition:opacity .8s ease;
+  }
+  #filtroAtivo.fade-out{opacity:0;}
+  body.full nav.menu{transform:translateX(-220px);}
+  body.full header, body.full footer{display:none;}
+  body.full main{margin-left:0;padding:8px;}
+  body.full #chart{height:90vh;}
 </style>
 </head>
-
 <body>
-<!-- BOTÃO FLUTUANTE MENU -->
-<button id="menuToggle">☰ Menu</button>
 
-<!-- LOADER -->
-<div id="loader">
-  <img src="dt_senai.png" alt="Logo Distrito Tecnológico SENAI-SP">
-  <span>Carregando <strong>Radar – Horizontes...</strong></span>
-</div>
-
-<!-- MENU -->
 <nav class="menu" id="sideMenu">
   <h2>MENU</h2>
-  <a href="#" id="btnShowAll">Mostrar Todos</a>
-  <a href="#" id="btnHideAll">Ocultar Todos</a>
-  <a href="#" id="btnTop10">Top 10</a>
-  <a href="#" id="btnPresentation">Modo Apresentação</a>
+  <button id="btnShowAll">Mostrar Todos</button>
+  <button id="btnHideAll">Ocultar Todos</button>
+  <button id="btnTop10">Top 10</button>
+  <button id="btnPresentation">Modo Apresentação</button>
 
   <h2>Horizontes</h2>
-  <a href="#" id="btnH1" class="h1">H1</a>
-  <a href="#" id="btnH2" class="h2">H2</a>
-  <a href="#" id="btnH3" class="h3">H3</a>
+  <button id="btnH1">H1</button>
+  <button id="btnH2">H2</button>
+  <button id="btnH3">H3</button>
 
   <h2>Grupos</h2>
-  <a href="#" id="btnG1">Obras de Infraestrutura</a>
-  <a href="#" id="btnG2">Digitalização da Construção</a>
-  <a href="#" id="btnG3">Construção Industrializada</a>
-  <a href="#" id="btnG4">Desempenho, Segurança, Conforto Acústico e Térmico</a>
-  <a href="#" id="btnG5">Serviços para Construtoras</a>
-  <a href="#" id="btnG6">Materiais Sustentáveis</a>
+  <button id="btnG1">Obras de Infraestrutura</button>
+  <button id="btnG2">Digitalização da Construção</button>
+  <button id="btnG3">Construção Industrializada</button>
+  <button id="btnG4">Desempenho, Segurança, Conforto Acústico e Térmico</button>
+  <button id="btnG5">Serviços para Construtoras</button>
+  <button id="btnG6">Materiais Sustentáveis</button>
+
+  <h2>Tipos</h2>
+  <button id="btnASD">ASD</button>
+  <button id="btnPDI">PDI</button>
+  <button id="btnMTG">MTG</button>
 
   <a href="https://tirggo.github.io/home-page/#" class="voltar">⟵ Voltar</a>
 </nav>
 
-<!-- CABEÇALHO -->
 <header>
   <span>INSTITUTO SENAI DE TECNOLOGIA DA CONSTRUÇÃO CIVIL - SENAI-SP</span>
-  <a href="https://tirggo.github.io/home-page/#" class="logo-link">
-    <img src="dt_senai.png" alt="Logo Distrito Tecnológico SENAI-SP">
-  </a>
 </header>
 
-<!-- CONTEÚDO -->
 <main>
   <div class="panel">
+    <div id="filtroAtivo"></div>
     <div class="legend">
-      <span class="badge"><i style="background:linear-gradient(135deg,#d81e05,#ff5b3c)"></i>H1</span>
-      <span class="badge"><i style="background:linear-gradient(135deg,#005fb8,#1e90ff)"></i>H2</span>
-      <span class="badge"><i style="background:linear-gradient(135deg,#006400,#00a000)"></i>H3</span>
+      <span class="badge"><i style="background:#d81e05"></i>H1</span>
+      <span class="badge"><i style="background:#005fb8"></i>H2</span>
+      <span class="badge"><i style="background:#006400"></i>H3</span>
     </div>
     <div id="chart"></div>
-    <div class="meta">• Clique na legenda para ligar/desligar cada projeto. • Eixo radial: 0–5.</div>
   </div>
 </main>
 
@@ -169,16 +154,9 @@ body.full main{margin-left:0;padding:1rem;}
   © 2025 | Infográfico público para fins institucionais e educacionais
 </footer>
 
-<!-- Plotly -->
 <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded",()=>{
-  const loader=document.getElementById("loader");
-  setTimeout(()=>{loader.style.animation="fadeOut 0.8s ease forwards";setTimeout(()=>loader.remove(),800);},1000);
-  buildRadar();
-});
-
-function buildRadar(){
+(function(){
   const criteria=["Complexidade","Know-How","Abrangência","Relevância","Retorno"];
   const projects=[
     "1 - Ensaios de Resistência e Reação ao Fogo em Sistemas Construtivos Comerciais e Industriais",
@@ -216,57 +194,76 @@ function buildRadar(){
     "#d81e05","#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#005fb8","#006400",
     "#005fb8","#005fb8"
   ];
+  const grupos=[1,4,6,6,5,3,6,5,2,1,1,4,2,5,2,3,6,6,2,2,1,4];
+  const tipos=["MTG","MTG","PDI","ASD","ASD","ASD","ASD","ASD","ASD","PDI",
+               "ASD","ASD","ASD","ASD","ASD","PDI","PDI","PDI","ASD","PDI","PDI","PDI"];
+
   const theta=criteria.concat([criteria[0]]);
-  const traces=projects.map((n,i)=>({type:"scatterpolar",r:vals[i].concat([vals[i][0]]),theta,name:n,fill:"toself",opacity:0.3,line:{width:1,color:colors[i]},fillcolor:colors[i]+"33"}));
-  const layout={margin:{l:30,r:30,t:10,b:10},showlegend:true,polar:{radialaxis:{range:[0,5],dtick:1}}};
-  Plotly.newPlot("chart",traces,layout,{responsive:true,displaylogo:false});
-
-  // === Filtros e interação ===
-  const btn=(id,fn)=>document.getElementById(id).addEventListener("click",fn);
-  const visibleAll=Array(traces.length).fill(true);
-  const hideAll=Array(traces.length).fill("legendonly");
-  btn("btnShowAll",()=>Plotly.restyle("chart","visible",visibleAll));
-  btn("btnHideAll",()=>Plotly.restyle("chart","visible",hideAll));
-  btn("btnTop10",()=>{Plotly.restyle("chart","visible",hideAll);Plotly.restyle("chart","visible",Array(10).fill(true));});
-  const filterColor=color=>{const vis=colors.map(c=>c===color);Plotly.restyle("chart","visible",vis);};
-  btn("btnH1",()=>filterColor("#d81e05"));
-  btn("btnH2",()=>filterColor("#005fb8"));
-  btn("btnH3",()=>filterColor("#006400"));
-
-  // === Modo apresentação ===
-  const body=document.body;
-  btn("btnPresentation",()=>{togglePresentation();});
-  document.addEventListener("keydown",e=>{
-    if(e.key==="Escape"&&body.classList.contains("full")){exitFullscreen();body.classList.remove("full");}
+  const traces=projects.map((n,i)=>{
+    const r=vals[i].concat([vals[i][0]]);
+    return {type:'scatterpolar',r,theta,name:n,fill:'toself',opacity:0.3,line:{width:1,color:colors[i]},fillcolor:colors[i]+'33'};
   });
-}
+  Plotly.newPlot('chart',traces,{showlegend:true,polar:{radialaxis:{range:[0,5],dtick:1}},margin:{l:30,r:30,t:10,b:10}},{responsive:true,displaylogo:false});
 
-/* === Botão Menu === */
-const menuBtn=document.getElementById("menuToggle");
-const sideMenu=document.getElementById("sideMenu");
-menuBtn.addEventListener("click",()=>{sideMenu.classList.toggle("show");});
-document.addEventListener("click",e=>{
-  if(!sideMenu.contains(e.target)&&!menuBtn.contains(e.target)&&sideMenu.classList.contains("show")){
-    sideMenu.classList.remove("show");
-  }
-});
+  const filtroAtivo=document.getElementById('filtroAtivo');
+  const setLabel=(txt,cor)=>{
+    filtroAtivo.classList.add('fade-out');
+    setTimeout(()=>{
+      filtroAtivo.textContent=txt||'';
+      filtroAtivo.style.color=cor||'#444';
+      filtroAtivo.classList.remove('fade-out');
+    },250);
+  };
+  const updateVisible=(arr,cond)=>{
+    Plotly.restyle('chart','visible',arr.map(v=>v===cond?true:'legendonly'));
+  };
+  const on=(id,fn)=>document.getElementById(id)?.addEventListener('click',e=>{e.preventDefault();fn();});
 
-/* === Funções de Tela Cheia === */
-function togglePresentation(){
-  const body=document.body;
-  if(!body.classList.contains("full")){
-    body.classList.add("full");
-    openFullscreen(document.documentElement);
-    Plotly.relayout("chart",{showlegend:false});
-  }else{
-    exitFullscreen();
-    body.classList.remove("full");
-    Plotly.relayout("chart",{showlegend:true});
-  }
-}
+  on('btnShowAll',()=>{Plotly.restyle('chart','visible',true);setLabel('',null);});
+  on('btnHideAll',()=>Plotly.restyle('chart','visible','legendonly'));
+  on('btnTop10',()=>{Plotly.restyle('chart','visible',Array(traces.length).fill('legendonly'));
+                     Plotly.restyle('chart','visible',true,[...Array(10).keys()]);
+                     setLabel('Top 10 Projetos','#444');});
 
-function openFullscreen(elem){if(elem.requestFullscreen){elem.requestFullscreen();}else if(elem.webkitRequestFullscreen){elem.webkitRequestFullscreen();}else if(elem.msRequestFullscreen){elem.msRequestFullscreen();}}
-function exitFullscreen(){if(document.exitFullscreen){document.exitFullscreen();}else if(document.webkitExitFullscreen){document.webkitExitFullscreen();}else if(document.msExitFullscreen){document.msExitFullscreen();}}
+  // Horizontes
+  on('btnH1',()=>{updateVisible(colors,'#d81e05');setLabel('H1 – Horizonte Curto Prazo','#d81e05');});
+  on('btnH2',()=>{updateVisible(colors,'#005fb8');setLabel('H2 – Horizonte Médio Prazo','#005fb8');});
+  on('btnH3',()=>{updateVisible(colors,'#006400');setLabel('H3 – Horizonte Longo Prazo','#006400');});
+
+  // Grupos
+  on('btnG1',()=>{updateVisible(grupos,1);setLabel('Obras de Infraestrutura','#333');});
+  on('btnG2',()=>{updateVisible(grupos,2);setLabel('Digitalização da Construção','#333');});
+  on('btnG3',()=>{updateVisible(grupos,3);setLabel('Construção Industrializada','#333');});
+  on('btnG4',()=>{updateVisible(grupos,4);setLabel('Desempenho, Segurança, Conforto Acústico e Térmico','#333');});
+  on('btnG5',()=>{updateVisible(grupos,5);setLabel('Serviços para Construtoras','#333');});
+  on('btnG6',()=>{updateVisible(grupos,6);setLabel('Materiais Sustentáveis','#333');});
+
+  // Tipos
+  on('btnASD',()=>{updateVisible(tipos,'ASD');setLabel('Tipo: ASD','#333');});
+  on('btnPDI',()=>{updateVisible(tipos,'PDI');setLabel('Tipo: PDI','#333');});
+  on('btnMTG',()=>{updateVisible(tipos,'MTG');setLabel('Tipo: MTG','#333');});
+
+  // Modo apresentação
+  on('btnPresentation',()=>{
+    const body=document.body;
+    if(!body.classList.contains('full')){
+      body.classList.add('full');
+      Plotly.relayout('chart',{showlegend:false});
+      (document.documentElement.requestFullscreen||(()=>{}))();
+    } else {
+      body.classList.remove('full');
+      Plotly.relayout('chart',{showlegend:true});
+      (document.exitFullscreen||(()=>{}))();
+    }
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&document.body.classList.contains('full')){
+      document.body.classList.remove('full');
+      Plotly.relayout('chart',{showlegend:true});
+      (document.exitFullscreen||(()=>{}))();
+    }
+  });
+})();
 </script>
 </body>
 </html>
