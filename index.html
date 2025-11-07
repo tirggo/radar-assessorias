@@ -60,6 +60,15 @@
     color:#333;font-weight:500;transition:all .2s;
   }
   nav.menu a:hover{transform:translateX(3px)}
+
+  /* === Cores dos botões H1, H2, H3 no MENU === */
+  nav.menu a.h1{background:#d81e05 !important;color:#fff !important;}
+  nav.menu a.h1:hover{background:#ff5b3c !important;box-shadow:0 0 8px rgba(216,30,5,0.5);}
+  nav.menu a.h2{background:#005fb8 !important;color:#fff !important;}
+  nav.menu a.h2:hover{background:#1e90ff !important;box-shadow:0 0 8px rgba(0,95,184,0.5);}
+  nav.menu a.h3{background:#006400 !important;color:#fff !important;}
+  nav.menu a.h3:hover{background:#00a000 !important;box-shadow:0 0 8px rgba(0,100,0,0.5);}
+
   nav.menu .voltar{
     margin-top:auto;
     background:#004080;color:#fff;font-weight:bold;
@@ -71,14 +80,6 @@
     box-shadow:0 0 10px rgba(0,64,128,0.6);
     transform:none;
   }
-
-  /* === Cores dos botões H1, H2, H3 no MENU === */
-  nav.menu a.h1{background:#d81e05;color:#fff;}
-  nav.menu a.h1:hover{background:#ff5b3c;box-shadow:0 0 8px rgba(216,30,5,0.5);}
-  nav.menu a.h2{background:#005fb8;color:#fff;}
-  nav.menu a.h2:hover{background:#1e90ff;box-shadow:0 0 8px rgba(0,95,184,0.5);}
-  nav.menu a.h3{background:#006400;color:#fff;}
-  nav.menu a.h3:hover{background:#00a000;box-shadow:0 0 8px rgba(0,100,0,0.5);}
 
   /* ===== CABEÇALHO ===== */
   header{
@@ -168,16 +169,12 @@
 <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 <script>
 window.addEventListener("load", () => {
-  // === Remover o loader suavemente ===
   const loader = document.getElementById("loader");
   loader.style.animation = "fadeOut 0.8s ease forwards";
   setTimeout(() => loader.remove(), 800);
-
-  // === Gerar o gráfico após o fade do loader ===
   setTimeout(buildRadar, 900);
 });
 
-// === Função de construção do Radar ===
 function buildRadar(){
   const criteria=["Complexidade","Know-How","Abrangência","Relevância","Retorno"];
   const projects=["1 - Ensaios de Resistência","2 - Ensaios Acústicos","3 - Valorização de Lodo","4 - Materiais Sustentáveis","5 - Canteiro Lean",
@@ -193,26 +190,24 @@ function buildRadar(){
       opacity:0.3,line:{width:1,color:colors[i]},fillcolor:colors[i]+"33"
     };
   });
+
   const layout={
     margin:{l:30,r:30,t:10,b:10},showlegend:true,
     polar:{radialaxis:{range:[0,5],dtick:1}}
   };
   Plotly.newPlot("chart",traces,layout,{responsive:true,displaylogo:false});
 
-  // === Filtros ===
-  const idx=[...Array(projects.length).keys()];
-  const filterBy=(arr,val)=>{
-    Plotly.restyle("chart","visible",arr.map(v=>v===val?true:"legendonly"));
+  // === Filtros corrigidos ===
+  document.getElementById("btnShowAll").onclick=()=>Plotly.restyle("chart","visible",true);
+  document.getElementById("btnHideAll").onclick=()=>Plotly.restyle("chart","visible","legendonly");
+  document.getElementById("btnTop10").onclick=()=>Plotly.restyle("chart","visible",true,[...Array(10).keys()]);
+  const filterByColor=(color)=>{
+    const visibles=colors.map(c=>c===color);
+    Plotly.restyle("chart","visible",visibles);
   };
-  document.getElementById("btnShowAll").onclick=()=>Plotly.restyle("chart","visible",true,idx);
-  document.getElementById("btnHideAll").onclick=()=>Plotly.restyle("chart","visible","legendonly",idx);
-  document.getElementById("btnTop10").onclick=()=>{
-    Plotly.restyle("chart","visible","legendonly",idx);
-    Plotly.restyle("chart","visible",true,idx.slice(0,10));
-  };
-  document.getElementById("btnH1").onclick=()=>filterBy(colors,"#d81e05");
-  document.getElementById("btnH2").onclick=()=>filterBy(colors,"#005fb8");
-  document.getElementById("btnH3").onclick=()=>filterBy(colors,"#006400");
+  document.getElementById("btnH1").onclick=()=>filterByColor("#d81e05");
+  document.getElementById("btnH2").onclick=()=>filterByColor("#005fb8");
+  document.getElementById("btnH3").onclick=()=>filterByColor("#006400");
 }
 </script>
 </body>
