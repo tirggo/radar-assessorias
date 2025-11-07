@@ -12,6 +12,7 @@
     background:#f9f9f9;color:#333;
     overflow-x:hidden;
     min-height:100vh;
+    transition:margin-left 0.6s ease;
   }
 
   /* ===== LOADER ===== */
@@ -21,26 +22,21 @@
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     color:#fff;z-index:1000;
   }
-  #loader img {
-    height:90px;width:auto;margin-bottom:16px;
-    filter:drop-shadow(0 0 8px rgba(255,255,255,0.6));
-    animation:pulse 2s infinite ease-in-out;
-  }
+  #loader img {height:90px;width:auto;margin-bottom:16px;filter:drop-shadow(0 0 8px rgba(255,255,255,0.6));animation:pulse 2s infinite ease-in-out;}
   #loader span {font-size:1rem;letter-spacing:0.5px;}
-  @keyframes pulse {
-    0%,100%{transform:scale(1);opacity:1;}
-    50%{transform:scale(1.05);opacity:0.85;}
-  }
+  @keyframes pulse {0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.05);opacity:0.85;}}
   @keyframes fadeOut {from{opacity:1}to{opacity:0;visibility:hidden}}
 
   /* ===== MENU ===== */
   nav.menu{
-    position:fixed;top:0;left:0;width:220px;height:100vh;
+    position:fixed;top:0;left:0;width:240px;height:100vh;
     background:#f1f5f9;border-right:2px solid #dde1e4;
     padding:1rem 0.8rem 4rem 0.8rem;
     display:flex;flex-direction:column;gap:0.6rem;
     z-index:100;
+    transition:transform 0.6s ease;
   }
+  nav.menu.hidden {transform:translateX(-260px);}
   nav.menu h2{text-align:center;color:#004080;font-size:1rem;margin-top:.6rem;margin-bottom:.6rem;}
   nav.menu a, nav.menu input{
     display:block;text-align:center;
@@ -52,45 +48,50 @@
   nav.menu a.h1{background:linear-gradient(135deg,#d81e05,#ff5b3c);color:#fff;border:none;}
   nav.menu a.h2{background:linear-gradient(135deg,#005fb8,#1e90ff);color:#fff;border:none;}
   nav.menu a.h3{background:linear-gradient(135deg,#006400,#00a000);color:#fff;border:none;}
-  nav.menu input[type="text"]{
-    border:1px solid #cbd5e1;border-radius:6px;padding:0.5rem;
-    font-size:0.9rem;margin-top:8px;
-  }
-  nav.menu input:focus{outline:none;box-shadow:0 0 6px rgba(0,64,128,0.3);}
-
-  nav.menu .voltar{
-    margin-top:auto;background:#004080;color:#fff;font-weight:bold;
-    border-radius:8px;padding:0.8rem;text-align:center;
-    box-shadow:0 2px 4px rgba(0,0,0,0.15);
-  }
+  nav.menu input[type="text"]{border:1px solid #cbd5e1;border-radius:6px;padding:0.5rem;font-size:0.9rem;margin-top:8px;}
+  nav.menu .voltar{margin-top:auto;background:#004080;color:#fff;font-weight:bold;border-radius:8px;padding:0.8rem;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,0.15);}
   nav.menu .voltar:hover{background:#003366;box-shadow:0 0 10px rgba(0,64,128,0.6);}
 
   /* ===== CABEÇALHO ===== */
   header{
     background:#004080;color:#fff;
     display:flex;justify-content:space-between;align-items:center;
-    padding:0.5rem 2rem;margin-left:220px;height:70px;
+    padding:0.5rem 2rem;margin-left:240px;height:70px;
+    transition:margin-left 0.6s ease;
   }
+  body.full header{margin-left:0;}
   header span{font-weight:bold;font-size:1rem;}
   header a.logo-link img{height:70px;width:auto;}
+  header button{
+    background:#fff;color:#004080;border:none;padding:0.5rem 1rem;
+    border-radius:6px;font-weight:bold;cursor:pointer;transition:all .3s;
+  }
+  header button:hover{background:#cbd5e1;color:#00264d;box-shadow:0 0 8px rgba(255,255,255,0.4);}
+  header .controls {display:flex;gap:8px;align-items:center;}
 
   /* ===== CONTEÚDO ===== */
-  main{flex:1;padding:2rem;margin-left:220px;}
-  .panel{
-    background:#fff;border:1px solid #e0e0e0;border-radius:10px;
-    padding:16px;box-shadow:0 4px 10px rgba(0,0,0,.05);
-  }
-  #chart{width:100%;height:780px;}
-
+  main{flex:1;padding:2rem;margin-left:240px;transition:margin-left 0.6s ease;}
+  body.full main{margin-left:0;}
+  .panel{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:16px;box-shadow:0 4px 10px rgba(0,0,0,.05);}
+  #chart{width:100%;height:850px;}
   .legend{display:flex;gap:10px;font-size:12px;color:#374151;margin-bottom:6px;}
   .badge{display:inline-flex;align-items:center;gap:6px}
   .badge i{width:12px;height:12px;border-radius:3px}
-
-  footer{
-    background:#eee;color:#555;text-align:center;font-size:.85rem;
-    padding:1rem;margin-left:220px;
-  }
+  footer{background:#eee;color:#555;text-align:center;font-size:.85rem;padding:1rem;margin-left:240px;transition:margin-left 0.6s ease;}
+  body.full footer{margin-left:0;}
   .meta{color:#5b6573;font-size:12px;margin-top:8px}
+
+  /* ===== BOTÃO FLUTUANTE ===== */
+  #exitPresentation{
+    position:fixed;bottom:24px;right:24px;
+    background:#004080;color:#fff;font-weight:bold;
+    padding:0.8rem 1.2rem;border:none;border-radius:50px;
+    cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.25);
+    opacity:0;pointer-events:none;transition:opacity 0.4s ease;
+    z-index:999;
+  }
+  #exitPresentation.show{opacity:1;pointer-events:auto;}
+  #exitPresentation:hover{background:#002a5c;box-shadow:0 0 12px rgba(0,64,128,0.6);}
 </style>
 </head>
 
@@ -102,11 +103,13 @@
 </div>
 
 <!-- MENU -->
-<nav class="menu">
+<nav class="menu" id="sideMenu">
   <h2>MENU</h2>
   <a href="#" id="btnShowAll">Mostrar Todos</a>
   <a href="#" id="btnHideAll">Ocultar Todos</a>
   <a href="#" id="btnTop10">Top 10</a>
+  <a href="#" id="btnToggleLegend">🗂️ Alternar Legenda</a>
+  <a href="#" id="btnToggleView">📊 Modo Apresentação</a>
 
   <h2>Horizontes</h2>
   <a href="#" id="btnH1" class="h1">H1</a>
@@ -114,12 +117,12 @@
   <a href="#" id="btnH3" class="h3">H3</a>
 
   <h2>Grupos</h2>
-  <a href="#" id="btnG1">G1</a>
-  <a href="#" id="btnG2">G2</a>
-  <a href="#" id="btnG3">G3</a>
-  <a href="#" id="btnG4">G4</a>
-  <a href="#" id="btnG5">G5</a>
-  <a href="#" id="btnG6">G6</a>
+  <a href="#" id="btnG1">Obras de Infraestrutura</a>
+  <a href="#" id="btnG2">Digitalização da Construção</a>
+  <a href="#" id="btnG3">Construção Industrializada</a>
+  <a href="#" id="btnG4">Desempenho, Segurança, Conforto Acústico e Térmico</a>
+  <a href="#" id="btnG5">Serviços para Construtoras</a>
+  <a href="#" id="btnG6">Materiais Sustentáveis</a>
 
   <h2>Tipos</h2>
   <a href="#" id="btnASD">ASD</a>
@@ -132,15 +135,16 @@
   <a href="https://tirggo.github.io/home-page/#" class="voltar">⟵ Voltar</a>
 </nav>
 
-<!-- CABEÇALHO -->
 <header>
   <span>INSTITUTO SENAI DE TECNOLOGIA DA CONSTRUÇÃO CIVIL - SENAI-SP</span>
-  <a href="https://tirggo.github.io/home-page/#" class="logo-link">
-    <img src="dt_senai.png" alt="Logo Distrito Tecnológico SENAI-SP">
-  </a>
+  <div class="controls">
+    <button onclick="window.print()">📄 Exportar PDF</button>
+    <a href="https://tirggo.github.io/home-page/#" class="logo-link">
+      <img src="dt_senai.png" alt="Logo Distrito Tecnológico SENAI-SP">
+    </a>
+  </div>
 </header>
 
-<!-- CONTEÚDO -->
 <main>
   <div class="panel">
     <div class="legend">
@@ -159,6 +163,8 @@
   © 2025 | Infográfico público para fins institucionais e educacionais
 </footer>
 
+<button id="exitPresentation">🔙 Sair do modo apresentação</button>
+
 <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 <script>
 window.addEventListener("load",()=>{
@@ -169,6 +175,11 @@ window.addEventListener("load",()=>{
 });
 
 function buildRadar(){
+  const exitBtn=document.getElementById('exitPresentation');
+  const menu=document.getElementById('sideMenu');
+  let showLegend=true;
+
+  // === DADOS COMPLETOS (22 projetos) ===
   const criteria=["Complexidade","Know-How","Abrangência","Relevância","Retorno"];
   const projects=[
 "1 - Ensaios de Resistência e Reação ao Fogo em Sistemas Construtivos Comerciais e Industriais",
@@ -176,8 +187,8 @@ function buildRadar(){
 "3 - Rota Tecnológica para Valorização de Lodo de ETE em produtos de construção",
 "4 - Análise e Especificação de Materiais Sustentáveis e de Baixo Carbono para empreendimentos",
 "5 - Assessoria em canteiro Lean Otimizado",
-"6 - Assessoria para criacao de processos otimizados de implementação de construção modular e pré-fabricada",
-"7 - Assessoria para analise e validação de Materiais Sustentáveis e BioConstrução",
+"6 - Assessoria para criação de processos otimizados de implementação de construção modular e pré-fabricada",
+"7 - Assessoria para análise e validação de Materiais Sustentáveis e BioConstrução",
 "8 - Assessoria em gestão de Ativos Preditiva (GAP)",
 "9 - Assessoria para Gêmeo Digital 'Lite' para Otimização de Processos em PMEs da Construção Civil",
 "10 - Gestão Inteligente da Água em Obras Urbanas",
@@ -192,9 +203,9 @@ function buildRadar(){
 "19 - Assessoria para projetos de casa Inteligente em Condomínios",
 "20 - Plataforma para o Monitoramento Contínuo via Gêmeos Digitais para Normas de Desempenhos",
 "21 - Sistema Inteligente de Gestão Hídrica e Captação e Reuso da água pluvial urbano integrado",
-"22 - PDI: Simulador Digital de Desempenho Térmico e Acústico Integrado à NBR 15575"
-];
-  const vals=[[4,5,5,3,4],[4,3,4,3,4],[5,3,3,3,4],[5,3,3,3,3],[5,3,3,3,3],
+"22 - PDI: Simulador Digital de Desempenho Térmico e Acústico Integrado à NBR 15575"];
+  const vals=[
+[4,5,5,3,4],[4,3,4,3,4],[5,3,3,3,4],[5,3,3,3,3],[5,3,3,3,3],
 [5,3,2,3,4],[5,3,2,4,3],[3,3,4,3,3],[3,3,3,3,4],[2,3,4,3,4],
 [3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3],[2,3,3,3,4],
 [3,3,2,3,3],[2,3,4,3,2],[2,4,3,3,2],[2,3,3,3,2],[1,4,4,3,1],
@@ -205,26 +216,27 @@ function buildRadar(){
   const grupos=[4,4,6,6,5,3,6,5,2,1,1,4,2,5,2,3,6,6,2,2,1,4];
   const tipos=["MTG","MTG","PDI","ASD","ASD","ASD","ASD","ASD","ASD","PDI",
 "ASD","ASD","ASD","ASD","ASD","PDI","PDI","PDI","ASD","PDI","PDI","PDI"];
-  const theta=criteria.concat([criteria[0]]);
 
+  const theta=criteria.concat([criteria[0]]);
   const traces=projects.map((n,i)=>{
     const r0=vals[i],r=r0.concat([r0[0]]);
-    return{type:'scatterpolar',r,theta,name:n,fill:'toself',
-      opacity:0.3,line:{width:1,color:colors[i]},fillcolor:colors[i]+'33'};
+    return{type:'scatterpolar',r,theta,name:n,fill:'toself',opacity:0.3,
+           line:{width:1,color:colors[i]},fillcolor:colors[i]+'33'};
   });
-  Plotly.newPlot('chart',traces,{margin:{l:30,r:30,t:10,b:10},showlegend:true,
-    polar:{radialaxis:{range:[0,5],dtick:1}}},{responsive:true,displaylogo:false});
+
+  const layout={
+    margin:{l:30,r:30,t:10,b:10},
+    showlegend:true,
+    legend:{font:{size:11},orientation:'h',x:0,y:-0.3,itemwidth:220,bgcolor:'rgba(255,255,255,0.9)'},
+    polar:{radialaxis:{range:[0,5],dtick:1}}
+  };
+  Plotly.newPlot('chart',traces,layout,{responsive:true,displaylogo:false});
 
   const idx=[...Array(projects.length).keys()];
-  const filterBy=(arr,val)=>{Plotly.restyle('chart','visible',arr.map(v=>v===val?true:'legendonly'));};
-
+  const filterBy=(arr,val)=>Plotly.restyle('chart','visible',arr.map(v=>v===val?true:'legendonly'));
   document.getElementById('btnShowAll').onclick=()=>Plotly.restyle('chart','visible',true,idx);
   document.getElementById('btnHideAll').onclick=()=>Plotly.restyle('chart','visible','legendonly',idx);
-  document.getElementById('btnTop10').onclick=()=>{
-    Plotly.restyle('chart','visible','legendonly',idx);
-    Plotly.restyle('chart','visible',true,idx.slice(0,10));
-  };
-
+  document.getElementById('btnTop10').onclick=()=>{Plotly.restyle('chart','visible','legendonly',idx);Plotly.restyle('chart','visible',true,idx.slice(0,10));};
   document.getElementById('btnH1').onclick=()=>filterBy(colors,'#d81e05');
   document.getElementById('btnH2').onclick=()=>filterBy(colors,'#005fb8');
   document.getElementById('btnH3').onclick=()=>filterBy(colors,'#006400');
@@ -238,11 +250,31 @@ function buildRadar(){
   document.getElementById('btnPDI').onclick=()=>filterBy(tipos,'PDI');
   document.getElementById('btnMTG').onclick=()=>filterBy(tipos,'MTG');
 
-  // Filtro por busca
-  document.getElementById('search').addEventListener('input',e=>{
-    const q=e.target.value.toLowerCase().trim();
-    const vis=idx.map(i=>projects[i].toLowerCase().includes(q)?true:'legendonly');
-    Plotly.restyle('chart','visible',vis);
+  document.getElementById('btnToggleLegend').onclick=()=>{
+    showLegend=!showLegend;
+    Plotly.relayout('chart',{showlegend:showLegend});
+  };
+
+  // === MODO APRESENTAÇÃO ===
+  document.getElementById('btnToggleView').onclick=()=>{
+    const body=document.body;
+    body.classList.toggle('full');
+    menu.classList.toggle('hidden');
+    const full=body.classList.contains('full');
+    showLegend=!full;
+    Plotly.relayout('chart',{showlegend:showLegend});
+    exitBtn.classList.toggle('show',full);
+  };
+  exitBtn.onclick=()=>{
+    document.body.classList.remove('full');
+    menu.classList.remove('hidden');
+    showLegend=true;
+    Plotly.relayout('chart',{showlegend:true});
+    exitBtn.classList.remove('show');
+  };
+  // tecla ESC
+  document.addEventListener('keydown',e=>{
+    if(e.key==="Escape" && document.body.classList.contains('full')) exitBtn.click();
   });
 }
 </script>
