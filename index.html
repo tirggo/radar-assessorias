@@ -13,92 +13,68 @@
     color:#333;
     min-height:100vh;
   }
+
+  /* ===== MENU ===== */
   nav.menu{
-    position:fixed;
-    top:0;left:0;
-    width:200px;height:100vh;
-    background:#f1f5f9;
-    border-right:2px solid #dde1e4;
-    padding:10px 8px;
-    display:flex;flex-direction:column;
-    gap:6px;
-    overflow-y:auto;
-    z-index:100;
+    position:fixed;top:0;left:0;width:200px;height:100vh;
+    background:#f1f5f9;border-right:2px solid #dde1e4;
+    padding:10px 8px;display:flex;flex-direction:column;
+    gap:6px;overflow-y:auto;z-index:100;
   }
   nav.menu h2{
-    text-align:center;
-    color:#004080;
-    font-size:.9rem;
-    margin:8px 0 4px;
-    font-weight:bold;
+    text-align:center;color:#004080;font-size:.9rem;
+    margin:8px 0 4px;font-weight:bold;
   }
-  nav.menu a, nav.menu button{
-    display:block;
-    text-align:center;
-    width:100%;
-    border:none;
-    cursor:pointer;
-    padding:.5rem;
-    border-radius:6px;
-    border:1px solid #cbd5e1;
-    background:#fff;
-    font-weight:bold;
-    color:#1f2937;
-    font-size:.85rem;
-    transition:box-shadow .15s, transform .15s;
+  nav.menu button, nav.menu a{
+    display:block;text-align:center;width:100%;border:none;cursor:pointer;
+    padding:.5rem;border-radius:6px;border:1px solid #cbd5e1;
+    background:#fff;font-weight:bold;color:#1f2937;font-size:.85rem;
+    transition:box-shadow .15s,transform .15s;
   }
-  nav.menu a:hover, nav.menu button:hover{
-    transform:translateX(2px);
-    box-shadow:0 0 6px rgba(0,0,0,.15);
-  }
+  nav.menu button:hover{transform:translateX(2px);box-shadow:0 0 6px rgba(0,0,0,.15);}
   nav.menu .voltar{
-    margin-top:auto;
-    background:#004080;
-    color:#fff;
-    border:none;
+    margin-top:auto;background:#004080;color:#fff;border:none;
   }
+
+  /* ===== CABEÇALHO / RODAPÉ ===== */
   header, footer{
-    margin-left:200px;
-    background:#004080;
-    color:#fff;
-    padding:10px 16px;
-    font-weight:600;
+    margin-left:200px;background:#004080;color:#fff;
+    padding:10px 16px;font-weight:600;
   }
   footer{
-    background:#eee;
-    color:#555;
-    font-weight:400;
-    text-align:center;
+    background:#eee;color:#555;font-weight:400;text-align:center;
   }
   main{margin-left:200px;padding:16px;}
   .panel{
-    background:#fff;
-    border:1px solid #e0e0e0;
-    border-radius:10px;
+    background:#fff;border:1px solid #e0e0e0;border-radius:10px;
     padding:12px;
   }
-  .legend{
-    display:flex;
-    gap:10px;
-    font-size:12px;
-    color:#374151;
-    margin:6px 0;
-  }
-  .badge{display:inline-flex;align-items:center;gap:6px;}
+
+  /* ===== LEGENDAS ===== */
+  .legend{display:flex;gap:10px;font-size:12px;color:#374151;margin:6px 0;}
+  .badge{display:inline-flex;align-items:center;gap:6px}
   .badge i{width:12px;height:12px;border-radius:3px;display:inline-block;}
   #chart{width:100%;height:780px;}
+
+  /* ===== RÓTULO ATIVO ===== */
   #filtroAtivo{
-    text-align:center;
-    font-weight:700;
-    margin:4px 0 10px;
-    font-size:1rem;
-    color:#444;
-    opacity:1;
-    transition:opacity .8s ease;
+    text-align:center;font-weight:700;margin:4px 0 10px;
+    font-size:1rem;color:#444;opacity:1;transition:opacity .8s ease;
   }
   #filtroAtivo.fade-out{opacity:0;}
+
+  /* ===== LINHAS DE BOTÕES ===== */
   .row{display:flex;justify-content:space-between;gap:4px;}
   .row button{flex:1;padding:8px;font-size:.8rem;border-radius:6px;}
+
+  /* ===== CORES DOS BOTÕES ===== */
+  #btnH1{background:#d81e05;color:#fff;}
+  #btnH2{background:#005fb8;color:#fff;}
+  #btnH3{background:#006400;color:#fff;}
+  #btnASD{background:#2e8b57;color:#fff;}
+  #btnPDI{background:#1e90ff;color:#fff;}
+  #btnMTG{background:#f4a300;color:#fff;}
+
   body.full nav.menu{transform:translateX(-220px);}
   body.full header, body.full footer{display:none;}
   body.full main{margin-left:0;padding:8px;}
@@ -107,6 +83,7 @@
 </head>
 <body>
 
+<!-- MENU LATERAL -->
 <nav class="menu" id="sideMenu">
   <h2>MENU</h2>
   <button id="btnShowAll">Mostrar Todos</button>
@@ -115,18 +92,18 @@
 
   <h2>Horizontes</h2>
   <div class="row">
-    <button id="btnH1" style="background:#d81e05;color:#fff;">H1</button>
-    <button id="btnH2" style="background:#005fb8;color:#fff;">H2</button>
-    <button id="btnH3" style="background:#006400;color:#fff;">H3</button>
+    <button id="btnH1">H1</button>
+    <button id="btnH2">H2</button>
+    <button id="btnH3">H3</button>
   </div>
 
   <h2>Grupos</h2>
-  <button id="btnG1">Obras de Infraestrutura</button>
-  <button id="btnG2">Digitalização da Construção</button>
-  <button id="btnG3">Construção Industrializada</button>
-  <button id="btnG4">Desempenho, Segurança, Conforto Acústico e Térmico</button>
-  <button id="btnG5">Serviços para Construtoras</button>
-  <button id="btnG6">Materiais Sustentáveis</button>
+  <button id="btnG1">🏗️ Obras de Infraestrutura</button>
+  <button id="btnG2">💻 Digitalização da Construção</button>
+  <button id="btnG3">🏠 Construção Industrializada</button>
+  <button id="btnG4">🔊 Desempenho, Segurança, Conforto Acústico e Térmico</button>
+  <button id="btnG5">🧰 Serviços para Construtoras</button>
+  <button id="btnG6">🌿 Materiais Sustentáveis</button>
 
   <h2>Tipos</h2>
   <div class="row">
@@ -160,6 +137,7 @@
   © 2025 | Infográfico público para fins institucionais e educacionais
 </footer>
 
+<!-- === PLOTLY === -->
 <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 <script>
 (function(){
@@ -218,13 +196,16 @@
   const updateVisible=(arr,cond)=>{Plotly.restyle('chart','visible',arr.map(v=>v===cond?true:'legendonly'));}
   const on=(id,fn)=>document.getElementById(id)?.addEventListener('click',e=>{e.preventDefault();fn();});
 
+  // === Filtros Gerais ===
   on('btnShowAll',()=>{Plotly.restyle('chart','visible',true);setLabel('',null);});
   on('btnHideAll',()=>Plotly.restyle('chart','visible','legendonly'));
 
-  on('btnH1',()=>{updateVisible(colors,'#d81e05');setLabel('H1 – Horizonte Curto Prazo','#d81e05');});
-  on('btnH2',()=>{updateVisible(colors,'#005fb8');setLabel('H2 – Horizonte Médio Prazo','#005fb8');});
-  on('btnH3',()=>{updateVisible(colors,'#006400');setLabel('H3 – Horizonte Longo Prazo','#006400');});
+  // === Horizontes ===
+  on('btnH1',()=>{updateVisible(colors,'#d81e05');setLabel('Horizonte 1 – Curto Prazo','#d81e05');});
+  on('btnH2',()=>{updateVisible(colors,'#005fb8');setLabel('Horizonte 2 – Médio Prazo','#005fb8');});
+  on('btnH3',()=>{updateVisible(colors,'#006400');setLabel('Horizonte 3 – Longo Prazo','#006400');});
 
+  // === Grupos ===
   on('btnG1',()=>{updateVisible(grupos,1);setLabel('Obras de Infraestrutura','#333');});
   on('btnG2',()=>{updateVisible(grupos,2);setLabel('Digitalização da Construção','#333');});
   on('btnG3',()=>{updateVisible(grupos,3);setLabel('Construção Industrializada','#333');});
@@ -232,10 +213,12 @@
   on('btnG5',()=>{updateVisible(grupos,5);setLabel('Serviços para Construtoras','#333');});
   on('btnG6',()=>{updateVisible(grupos,6);setLabel('Materiais Sustentáveis','#333');});
 
-  on('btnASD',()=>{updateVisible(tipos,'ASD');setLabel('Tipo: ASD','#333');});
-  on('btnPDI',()=>{updateVisible(tipos,'PDI');setLabel('Tipo: PDI','#333');});
-  on('btnMTG',()=>{updateVisible(tipos,'MTG');setLabel('Tipo: MTG','#333');});
+  // === Tipos ===
+  on('btnASD',()=>{updateVisible(tipos,'ASD');setLabel('Assessoria Direta','#2e8b57');});
+  on('btnPDI',()=>{updateVisible(tipos,'PDI');setLabel('Pesquisa, Desenvolvimento e Inovação','#1e90ff');});
+  on('btnMTG',()=>{updateVisible(tipos,'MTG');setLabel('Metrologia','#f4a300');});
 
+  // === Modo Apresentação ===
   on('btnPresentation',()=>{
     const body=document.body;
     if(!body.classList.contains('full')){
